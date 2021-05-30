@@ -1,0 +1,27 @@
+.memberbox{
+ margin: 100px;
+ background-color:white;
+ border-style:dashed;
+}
+table{
+  text-align: center;
+}
+img{
+  width:330px;
+  height:330px;
+}
+#welcome{
+  font-size: 30pt;
+  margin-top:110px;
+  margin-left: 35px;
+}
+#movelike{
+  margin-top: 60px;
+  margin-left:35px;
+  color: black;
+}
+#point{
+  line-height:200%;
+  margin-top:120px;
+  margin-left: 40px;
+}

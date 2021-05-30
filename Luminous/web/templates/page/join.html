@@ -1,0 +1,58 @@
+{% extends 'page/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    {% load static %}
+    {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'page/css/join.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <section class="container">
+        <h2>join</h2>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="form-group">
+                <label>ID</label>
+                <input type="text" class="form-control" name="username" id="username">
+            </div>
+            <div class="form-group">
+                <label>PW</label>
+                <input type="password" class="form-control" name="password1" id="password1">
+            </div>
+            <div class="form-group">
+                <label>PW Confirm</label>
+                <input type="password" class="form-control" name="password2" id="password2">
+            </div>
+            <div class="form-group">
+                <label>NAME</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+            <div class="form-group">
+                <label>PHONE</label>
+                <input type="tel" class="form-control" name="phone" id="phone">
+            </div>
+            <div class="form-group">
+                <label>ADDRESS</label>
+                <input type="text" class="form-control" name="address" id="address">
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" id="submit" value="join">
+            </div>
+            <!-- 개인정보취급어쩌고 -->
+            
+        </form>
+    </section>
+    {% endblock content %}
+</body>
+
+</html>

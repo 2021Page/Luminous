@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luminous</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+
+    <!-- fontawesome -->
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        window.addEventListener("resize", function () {
+            "use strict"; window.location.reload();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.innerWidth > 992) {
+                document.querySelectorAll('.nav-item').forEach(function (everyitem) {
+                    everyitem.addEventListener('mouseover', function (e) {
+                        let el_link = this.querySelector('a[data-bs-toggle]');
+                        if (el_link != null) {
+                            let nextEl = el_link.nextElementSibling;
+                            el_link.classList.add('show');
+                            nextEl.classList.add('show');
+                        }
+                    });
+                    everyitem.addEventListener('mouseleave', function (e) {
+                        let el_link = this.querySelector('a[data-bs-toggle]');
+                        if (el_link != null) {
+                            let nextEl = el_link.nextElementSibling;
+                            el_link.classList.remove('show');
+                            nextEl.classList.remove('show');
+                        }
+                    })
+                });
+            }
+        });
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'page/css/base.css' %}">
+    {% block extrahead %}
+    {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <div class="icons">
+            <span class="dropdown">
+                <a href="#" role="button" id="dropdownMenuLink" class="icon" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-search"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li class="dropdown-item">
+                        <form action="{% url 'result' %}" method="GET">
+                            {% csrf_token %}
+                            <input type="text" id="searchstr" name="searchstr">
+                            <input type="submit" id="basesearch" value="Search">
+                        </form>
+                    </li>
+                </ul>
+            </span>
+
+            <a href="#" class="icon"><i class="fas fa-heart"></i></a>
+
+            <span class="dropdown">
+                <a href="#" role="button" id="dropdownMenuLink" class="icon" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% if user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                    <li><a class="dropdown-item" href="{% url 'join' %}">Join</a></li>
+                    <li><a class="dropdown-item" href="{% url 'cart' %}">Cart</a></li>
+                    <li><a class="dropdown-item" href="{% url 'mypage' %}">My Page</a></li>
+                </ul>
+            </span>
+        </div>
+        <ul class="nav">
+            <a href="{% url 'main' %}"><img src="{% static 'page/img/logo.png' %}"></a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'howto' %}">How to</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" data-bs-toggle="dropdown">Shop</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'shop' %}"> New </a></li>
+                    <li><a class="dropdown-item" href="{% url 'shop' %}"> Best </a></li>
+                    <li><a class="dropdown-item" href="{% url 'shop' %}"> Nail </a></li>
+                    <li><a class="dropdown-item" href="{% url 'shop' %}"> Pedi </a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'event' %}">Event</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'location' %}">Location</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer class="container-fluid">
+        <section style="padding-top: 70px;">
+            <div class="row" >
+                <div class="col-sm-6">
+                    <img class="img" src="{% static 'page/img/main/jenny.jpg' %}" width="100%">
+                </div>
+                <div class="col-sm-6">
+                    <img class="img" src="{% static 'page/img/main/jenny3.png' %}" width="100%">
+                </div>
+            </div>
+        </section>
+
+        <div class="bottom"> LUMINOUS </div>
+    </footer>
+</body>
+
+</html>

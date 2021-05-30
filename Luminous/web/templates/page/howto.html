@@ -1,0 +1,40 @@
+{% extends 'page/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ</title>
+
+  {% load static %}
+  {% block extrahead %}
+  <link rel="stylesheet" href="{% static 'page/css/howto.css' %}">
+  {% endblock %}
+</head>
+
+<body>
+  {% block content %}
+
+  <h1 style="padding:17px; background-color:#EBF5FF" id="head">How to </h1><br><br>
+  <div class="container-fluid bg-4 text-center">
+
+    <div id="content" class="row">
+      <div class="col-lg-6">
+        <p id="howto1"><b> To attach nail tips </b><br>
+          <video src="{% static 'page/video/attach.mkv' %}" preload="auto" controls width="600" height="500"
+            type="video/mp4" poster="img/howto.png"></video>
+      </div>
+      <div class="col-lg-6">
+        <div id="howto2"> <b>To remove nail tips </b><br>
+          <video src="{% static 'page/video/remove.mkv' %}" preload="auto" controls width="600" height="500"
+            type="video/mp4" poster="img/howto.png"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</body>
+
+</html>

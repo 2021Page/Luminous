@@ -1,0 +1,43 @@
+{% extends 'page/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    {% load static %}
+    {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'page/css/login.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <section class="container">
+        <h2>Login</h2>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="form-group">
+                <label for="username">ID</label>
+                <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="form-group">
+                <label for="password">PW</label>
+                <input type="password" class="form-control" name="password" id="password" value="{{ form.password.value|default_if_none:'' }}">
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" id="submit" value="Login">
+                <br>
+                <a href="{% url 'join' %}" style="color: red; text-decoration: none;">Join</a>
+            </div>
+        </form>
+        
+    </section>
+    {% endblock content %}
+</body>
+
+</html>
