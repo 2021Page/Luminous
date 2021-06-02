@@ -34,21 +34,12 @@
   <section class="container-fluid">
     <div class="row">
       <div class="col-sm-2"></div>
-      <div class="col-sm-3">
-        <p style="font-size:30px ">1.</p>
-        <img src="{% static 'page/img/nail/nail2.png' %}" style="overflow: hidden;" width="70%" height="auto">
-        <p style="font-size:20px; text-align:center">Sky Bloom<br>$13</p>
+      {% for best in bests %}
+      <div class="col-sm-3" style="text-align:center">
+        <img src="{{ best.image.url }}" style="overflow: hidden; width:70%; height:auto;">
+        <p style="font-size:20px; ">{{ best.title }}<br>${{ best.price }}</p>
       </div>
-      <div class="col-sm-3">
-        <p style="font-size:30px">2.</p>
-        <img src="{% static 'page/img/pedi/pedi11.png' %}" style="overflow: hidden;" width="70%" height="auto">
-        <p style="font-size:20px; text-align:center">Zen Garden<br>$10</p>
-      </div>
-      <div class="col-sm-3">
-        <p style="font-size:30px">3.</p>
-        <img src="{% static 'page/img/nail/nail11.png' %}" style="overflow: hidden;" width="70%" height="auto">
-        <p style="font-size:20px; text-align:center">Rose bouquet<br>$9</p>
-      </div>
+      {% endfor %}
       <div class="col-sm-1"></div>
     </div>
   </section>
@@ -59,27 +50,18 @@
     <div class="row">
       <div class="col-sm-2">
       </div>
-      <div class="col-sm-3">
-        <p style="font-size:30px ">1.</p>
-        <img src="{% static 'page/img/nail/nail4.png' %}" style="overflow: hidden; width:70%; height:auto;">
-        <p style="font-size:20px; text-align:center">Sky Bloom<br>$13</p>
+      {% for new in news %}
+      <div class="col-sm-3" style="text-align:center">
+        <img src="{{ new.image.url }}" style="overflow: hidden; width:70%; height:auto;">
+        <p style="font-size:20px; ">{{ new.title }}<br>${{ new.price }}</p>
       </div>
-      <div class="col-sm-3">
-        <p style="font-size:30px">2.</p>
-        <img src="{% static 'page/img/nail/nail5.png' %}" style="overflow: hidden; width:70%; height:auto;">
-        <p style="font-size:20px; text-align:center">Zen Garden<br>$10</p>
-      </div>
-      <div class="col-sm-3">
-        <p style="font-size:30px">3.</p>
-        <img src="{% static 'page/img/pedi/pedi3.png' %}" style="overflow: hidden; width:70%; height:auto;">
-        <p style="font-size:20px; text-align:center">Rose bouquet<br>$9</p>
-      </div>
+      {% endfor %}
       <div class="col-sm-1">
       </div>
     </div>
     </div>
   </section>
-  
+
   {% endblock content %}
 
 </body>

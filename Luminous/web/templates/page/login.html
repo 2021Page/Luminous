@@ -11,13 +11,18 @@
     {% load static %}
     {% block extrahead %}
     <link rel="stylesheet" href="{% static 'page/css/login.css' %}">
+    <script>
+        function gojoin() {
+            location.href="{% url 'join' %}";
+        }
+    </script>
     {% endblock %}
 </head>
 
 <body>
     {% block content %}
-    <section class="container">
-        <h2>Login</h2>
+    <h1 style="padding:17px; background-color:#EBF5FF" id = "head">Login</h1><br>
+    <section class="container login">
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             {% include "form_errors.html" %}
@@ -31,8 +36,7 @@
             </div>
             <div style="text-align: center;">
                 <input type="submit" id="submit" value="Login">
-                <br>
-                <a href="{% url 'join' %}" style="color: red; text-decoration: none;">Join</a>
+                <input type="button" id="join" value="join" onclick="gojoin();">
             </div>
         </form>
         

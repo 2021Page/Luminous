@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .forms import UserForm
 
 urlpatterns = [
     path('', views.main, name='main'), 
@@ -13,7 +14,11 @@ urlpatterns = [
     path('result', views.result, name='result'),
 
     path('howto/', views.howto, name='howto'), 
-    path('shop/', views.shop, name='shop'), 
+    path('shop/new/', views.new, name='new'), 
+    path('shop/best/', views.best, name='best'), 
+    path('shop/nail/', views.nail, name='nail'), 
+    path('shop/pedi/', views.pedi, name='pedi'), 
+    path('shop/detail/<int:product_id>', views.detail, name='detail'),
     path('event/', views.event, name='event'), 
     path('faq/', views.faq, name='faq'),
     path('location/', views.location, name='location'),

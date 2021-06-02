@@ -1,13 +1,15 @@
 #main {
     position: relative;
-    height: 80%;
-    overflow: hidden !important;
+    height: 1000px;
+    overflow: hidden;
     z-index: -1;
 }
 
 #main img {
     position: relative;
     width: 100%;
+    height: auto;
+    overflow: hidden;
     z-index: -1;
 }
 

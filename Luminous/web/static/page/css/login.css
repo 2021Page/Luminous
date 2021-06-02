@@ -1,20 +1,26 @@
-h2 {
-    font-size: 60px;
-    color: powderblue;
-    margin: 20px auto;
-    text-align: center;
+.login label {
+    font-size: 25px;
 }
 
-label {
-    font-size: 30px;
-}
-
-#submit {
-    font-size: 20px;
+.login #submit {
     margin-top: 20px;
-    margin-bottom: 50px;
-    background-color: powderblue;
+    width:210px;
+    height:30px;
+    background-color: #EBF5FF;
     border-radius: 5px;
     border: solid 1px powderblue;
-    padding: 5px 10px;
+    position:relative;
+    text-align:center;
+
+}
+
+#join {
+    margin-top: 10px;
+    width:210px;
+    height:30px;
+    background-color: #EBF5FF;
+    border-radius: 5px;
+    border: solid 1px powderblue;
+    position:relative;
+    text-align:center;
 }

@@ -1,0 +1,92 @@
+{% extends 'page/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+
+    {% load static %}
+    {% block extrahead %}
+    <style>
+        #Cart {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .detail {
+            width: 210px;
+            height: 30px;
+            background-color: #EBF5FF;
+            border-radius: 5px;
+            border: solid 1px powderblue;
+            position: relative;
+            text-align: center;
+        }
+
+        #Like {
+            width: 210px;
+            height: 30px;
+            background-color: #EBF5FF;
+            border-radius: 5px;
+            border: solid 1px powderblue;
+            position: relative;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        function likealert() {
+            alert("The product has been reflected in the list of likes.");
+        }
+        function cartalert() {
+            alert("The product is in the cart.");
+        }
+        function buynowalert() {
+            alert("Your order has been completed.");
+        }
+    </script>
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+
+    <section class="container-fluid">
+        {% if product %}
+        {% if product.category == "nail" %}
+        <h1 style="padding:17px; background-color:#EBF5FF" id="head">Shop_Nail</h1><br><br>
+        {% elif product.category == "pedi" %}
+        <h1 style="padding:17px; background-color:#EBF5FF" id="head">Shop_Pedi</h1><br><br>
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ product.image.url }}"
+                        style="overflow: hidden; border: 5px solid lightgray; text-align:center; margin:50px;width:350px; height:350px; height:auto;">
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    {% if product.category == "nail" %}
+                    <p style="font-size:25px;"><b>LUMINOUS NAIL</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
+                    {% elif product.category == "pedi" %}
+                    <p style="font-size:25px;"><b>LUMINOUS PEDI</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
+                    {% endif %}
+                    <hr>
+                    <input type="submit" class="detail" id="Like" value="Like" onclick="likealert()"><br>
+                    <input type="button" class="detail" id="Cart" value="Cart" onclick="cartalert()"><br>
+                    <input type="submit" class="detail" id="Buynow" value="Buynow" onclick="buynowalert()"><br>
+                    <hr>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+    </section>
+
+    {% endblock content %}
+</body>
+
+</html>

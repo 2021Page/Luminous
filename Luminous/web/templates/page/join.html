@@ -16,8 +16,8 @@
 
 <body>
     {% block content %}
+    <h1 style="padding:17px; background-color:#EBF5FF" id = "head">Join</h1><br>
     <section class="container">
-        <h2>join</h2>
         <form method="POST" class="post-form">
             {% csrf_token %}
             {% include "form_errors.html" %}
@@ -45,9 +45,16 @@
                 <label>ADDRESS</label>
                 <input type="text" class="form-control" name="address" id="address">
             </div>
-            <div style="text-align: center;">
-                <input type="submit" id="submit" value="join">
-            </div>
+            <div id="privacy"><b>[Personal Information Collection and Usage Agreement]</b><br><br>
+                1. Purpose: Collection of personal information for use of the site<br>
+                2. Items: ID, password, name, email, mobile phone number<br>
+                3. Retention period: retained until membership withdrawal<br>
+                (however, application history information is unidirectionally encrypted and stored for one year <br>
+                from the date of withdrawal and then destroyed.)<br>
+                <br>
+                <input type="radio" required>&nbsp<label style="font-size:15px">I agree to the collection of personal information.</label><br>
+              <input type="submit" id="submit" value="join">
+              </div>
             <!-- 개인정보취급어쩌고 -->
             
         </form>
