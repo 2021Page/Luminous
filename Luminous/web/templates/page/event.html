@@ -17,44 +17,66 @@
 <body>
     {% block content %}
     <h1 style="padding:17px; background-color:#EBF5FF" id="head">Event </h1>
-    <div id="event">
-        <br><br>
-        <img id="img" src="{% static 'page/img/eventimg1.png' %}" width="350" height="350" alt="event1">
-        <p style="font-size : x-large">Ruminous New Member Event<br><br></p>
-        <p style="left:50px;"> If you join Ruminous, you will receive a coupon worth 5000 won. <br> It can only be used
-            in the Ruminous online shopping mall. [Can't Use off-line store]
-            <br> *Validity: Within 7 days of membership <br> * Available for purchases over 10,000 won
-        </p>
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <img src="{% static 'page/img/eventimg1.png' %}" width="350" height="350" alt="event1">
+                <br>
+            </div>
+            <div class="col-md-8 event">
+                <br>
+                <p style="font-size : x-large">Ruminous New Member Event<br><br></p>
+                <p style="left:50px;"> If you join Ruminous, you will receive a coupon worth 5000 won. <br> It can only be used
+                    in the Ruminous online shopping mall. [Can't Use off-line store]
+                    <br> *Validity: Within 7 days of membership <br> * Available for purchases over 10,000 won
+                </p>
+            </div>
+        </div>
 
-    <div id="event2"><br>
         <hr>
-        <br><br>
-        <img id="img" src="{% static 'page/img/eventimg2.png' %}" width="350" height="350" alt="event2">
-        <p style="font-size : x-large">Ruminous SNS Authentication Event <br><br></p>
-        <p style="left:50px;"> When you certify your Ruminous nails on Instagram, you will receive a Luminos nail and
-            pedi set through a lottery. <br> You must enter the #tag below correctly.
-            <br> Hashtag: #Luminose #Ruminose #LuminoseEvent
-            <br> *If you do not meet the event benefit criteria, your benefits may be cancelled.
-            <br> *Event Period: 2021.5.18 to 2021.7.1 <br>* Winner announcement date: 7.10 (Sat) (Individual contact)
-        </p>
-    </div>
-    <div id="event3"><br>
+
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <img src="{% static 'page/img/eventimg2.png' %}" width="350" height="350" alt="event2">
+                <br>
+            </div>
+            <div class="col-md-8 event">
+                <br>
+                <p style="font-size : x-large">Ruminous SNS Authentication Event <br><br></p>
+            <p style="left:50px;"> When you certify your Ruminous nails on Instagram, you will receive a Luminos nail and
+                pedi set through a lottery. <br> You must enter the #tag below correctly.
+                <br> Hashtag: #Luminose #Ruminose #LuminoseEvent
+                <br> *If you do not meet the event benefit criteria, your benefits may be cancelled.
+                <br> *Event Period: 2021.5.18 to 2021.7.1 <br>* Winner announcement date: 7.10 (Sat) (Individual contact)
+            </p>
+            </div>
+        </div>
+    
         <hr>
-        <br><br>
-        <img id="img" src="{% static 'page/img/eventimg3.png' %}" width="350" height="350" alt="event3">
-        <p style="font-size : x-large">Ruminous Kakao Channel Addition Event<br><br></p>
-        <p style="left:50px;">If you add a Ruminous Kakao channel, we offer a coupon worth 3000 won. <br> You can easily
-            receive various news of Ruminous from your smartphone.
-            <br>*Additional coupons for Kakao Channel can only be used for Ruminary online shopping malls. [Can't Use
-            off-line store]
-            <br> *If you add Kakao Channel during June, you will receive Starbucks Americano coupons for 30 people
-            through a lottery.
-            <br> *Validity: Within 30 days of download <br>*This event may be terminated or changed without notice,
-            depending on the limited number of coupons and our circumstances.
-        </p>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <img src="{% static 'page/img/eventimg3.png' %}" width="350" height="350" alt="event3">
+                <br>
+            </div>
+            <div class="col-md-8 event">
+                <br>
+                <p style="font-size : x-large">Ruminous Kakao Channel Addition Event<br><br></p>
+            <p style="left:50px;">If you add a Ruminous Kakao channel, we offer a coupon worth 3000 won. <br> 
+                You can easily receive various news of Ruminous from your smartphone.<br>
+                *Additional coupons for Kakao Channel can only be used for Ruminary online shopping malls. [Can't Use off-line store]<br>
+                *If you add Kakao Channel during June, you will receive Starbucks Americano coupons for 30 people
+                through a lottery.<br>
+                *Validity: Within 30 days of download <br>*This event may be terminated or changed without notice,
+                depending on the limited number of coupons and our circumstances.
+            </p>
+            </div>
+        </div>
     </div>
-    </div>
+    
     {% endblock content %}
 </body>
 

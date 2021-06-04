@@ -1,23 +1,10 @@
 #head{
   text-align : center;
 }
-#event{
 
-  margin-left: 100px;
-  margin-right: 100px;
-}
-#img{
-  float:left;
-  margin-left:50px;
-  margin-right: 40px;
-}
-#event2{
-  clear:both;
-  margin-left: 100px;
-  margin-right: 100px;
-}
-#event3{
-  clear:both;
-  margin-left: 100px;
-  margin-right: 100px;
+.event{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 40px;
 }

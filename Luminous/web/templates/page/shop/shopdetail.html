@@ -73,10 +73,12 @@
                     <p style="font-size:25px;"><b>LUMINOUS NAIL</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
                     {% elif product.category == "pedi" %}
                     <p style="font-size:25px;"><b>LUMINOUS PEDI</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
+                    {% elif product.category == "care" %}
+                    <p style="font-size:25px;"><b>LUMINOUS CARE</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
                     {% endif %}
                     <hr>
                     <input type="submit" class="detail" id="Like" value="Like" onclick="likealert()"><br>
-                    <input type="button" class="detail" id="Cart" value="Cart" onclick="cartalert()"><br>
+                    <button class="detail" id="Cart" onclick="cartalert()"><a style="text-decoration: none; color: black;" href="{% url 'cartadd' product.id %}">Cart</a></button><br>
                     <input type="submit" class="detail" id="Buynow" value="Buynow" onclick="buynowalert()"><br>
                     <hr>
                 </div>

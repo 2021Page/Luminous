@@ -10,14 +10,101 @@
 
     {% load static %}
     {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'page/css/event.css' %}">
+    <style media="screen">
+        #button {
+
+            margin: 0px 60px 30px;
+            text-align: right;
+        }
+
+        #buy {
+            background-color: white;
+            color: black;
+            padding: 5px;
+            border: 3px solid pink;
+            width: 200px;
+            height: 40px;
+            font-size: 12pt;
+        }
+
+        table,
+        td {
+            line-height: 40px;
+        }
+    </style>
     {% endblock %}
 </head>
 
 <body>
     {% block content %}
 
-    <h1 style="padding:17px; background-color:#EBF5FF" id = "head">Cart </h1>
+    <h1 style="padding:17px; background-color:#EBF5FF" id="head">Cart </h1>
+
+    {% if products %}
+    <div style="text-align: center; margin: 50px 60px 50px 60px;">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Product Amount</th>
+                    <th scope="col">Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in products %}
+
+                <tr class="table">
+                    <th scope="row"><img src="{{ item.product.image.url }}" width="40" height="40" alt="nail"></th>
+                    <td>
+                        <a href="{% url 'detail' item.product.id %}" style="text-decoration: none; color: black; display: table; width: 100%;">
+                            {{ item.product.title }}
+                        </a>
+                    </td>
+
+                    <td id='price' value='{{ item.product.price }}'>${{ item.product.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+    </div>
+
+    <script>
+        totalprice += price;
+    </script>
+
+    <div style="text-align: center; margin: 80px 60px 30px 60px;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Merchandise</th>
+                    <th scope="col">Shipping fee</th>
+                    <th scope="col">Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table">
+                    <th scope="row">${{ subtotal }}</th> <!-- 구매하려는 상품 총합 가격-->
+                    <td>$3</td>
+                    <!--배송비-->
+                    <td>${{ total }}</td>
+                    <!--상품가격 + 배송비 = 결제가격 -->
+                </tr>
+            </tbody>
+        </table>
+        <div id="button">
+            <button id="buy">BUY NOW</button>
+        </div>
+    </div>
+    {% else %}
+    <p style="font-size:40px; text-align:center; margin-top: 50px; margin-bottom: 50px;">Nothing to show<br>Let's add
+        one</p>
+    {% endif %}
 
 
     {% endblock content %}

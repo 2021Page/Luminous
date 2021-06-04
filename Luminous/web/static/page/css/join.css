@@ -1,18 +1,8 @@
-.join {
-    margin: 40px 0px;
-}
-
-.join h2 {
-    font-size: 60px;
-    color: powderblue;
-    margin: 20px auto;
-}
-
 .join label {
     font-size: 25px;
 }
 
-.join #submit {
+#submit {
   margin-top: 10px;
   width:210px;
   height:30px;

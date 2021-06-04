@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from .forms import UserForm, SearchForm
-from .models import Product
+from .models import Product, Cart
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -22,11 +24,10 @@ def join(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = raw_password)
-            login(request, user)
-            return redirect(request, 'page/main.html')
+            return render(request, 'page/login.html')
     else:
         form = UserForm()
-    return render(request, 'page/join.html')
+    return render(request, 'page/join.html', {'form': form})
 
 def login(request):
     return render(request, 'page/login.html')
@@ -35,19 +36,52 @@ def logout(request):
     return render(request, 'page/main.html')
 
 def cart(request):
-    return render(request, 'page/cart.html')
+    userID = request.user.id
+    results = Cart.objects.filter(userID__icontains=userID)
+    subtotal = 0
+    total = 0
+    for result in results:
+        subtotal += int(result.product.price)
+    total = subtotal + 3
+    context = {
+        'products' : results,
+        'subtotal' : subtotal,
+        'total' : total
+    }
+    return render(request, 'page/cart.html', context)
+
+def cart_add(request, product_id):
+    product = Product.objects.get(id=product_id)
+    results = Cart.objects.filter(product__icontains=product)
+    if results:
+        results.quantity += 1
+    else:
+        cart = Cart.objects.create(
+            userID=request.user.id,
+            product = product,
+            quantity = 1,
+        )
+    cart.save()
+    cart(request)
+
+def cart_remove(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart = Cart.objects.get(userID=request.user.id, product=product)
+    cart.delete()
+
+    return render(request, 'page/cart.html', context)
 
 def mypage(request):
     return render(request, 'page/mypage.html')
 
-def result(request):
-    search = request.GET.get('searchstr')
-    results = Product.objects.filter(title__icontains=search)
+def like(request):
+    results = Product.objects.filter(special__icontains="new")
     context = {
-        'searchstr' : search,
         'products' : results
     }
-    return render(request, 'page/result.html', context)
+    return render(request, 'page/like.html', context)
+
+
 
 def howto(request):
     return render(request, 'page/howto.html')
@@ -80,6 +114,13 @@ def pedi(request):
     }
     return render(request, 'page/shop/shoppedi.html', context)
 
+def care(request):
+    results = Product.objects.filter(category__icontains="care")
+    context = {
+        'products' : results
+    }
+    return render(request, 'page/shop/shopcare.html', context)
+
 def detail(request, product_id):
     product = Product.objects.get(id=product_id)
     context = {
@@ -96,3 +137,12 @@ def faq(request):
 
 def location(request):
     return render(request, 'page/location.html')
+
+def result(request):
+    search = request.GET.get('searchstr')
+    results = Product.objects.filter(title__icontains=search)
+    context = {
+        'searchstr' : search,
+        'products' : results
+    }
+    return render(request, 'page/result.html', context)

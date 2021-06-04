@@ -17,47 +17,48 @@
 <body>
     {% block content %}
     <h1 style="padding:17px; background-color:#EBF5FF" id = "head">Join</h1><br>
-    <section class="container">
-        <form method="POST" class="post-form">
+    <section class="container join">
+        <form method="POST">
             {% csrf_token %}
             {% include "form_errors.html" %}
             <div class="form-group">
                 <label>ID</label>
-                <input type="text" class="form-control" name="username" id="username">
+                <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>PW</label>
-                <input type="password" class="form-control" name="password1" id="password1">
+                <input type="password" class="form-control" name="password1" id="password1" value="{{ form.password1.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>PW Confirm</label>
-                <input type="password" class="form-control" name="password2" id="password2">
+                <input type="password" class="form-control" name="password2" id="password2" value="{{ form.password2.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>NAME</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" value="{{ form.name.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>PHONE</label>
-                <input type="tel" class="form-control" name="phone" id="phone">
+                <input type="tel" class="form-control" name="phone" id="phone" value="{{ form.phone.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>ADDRESS</label>
-                <input type="text" class="form-control" name="address" id="address">
+                <input type="text" class="form-control" name="address" id="address" value="{{ form.address.value|default_if_none:'' }}">
             </div>
-            <div id="privacy"><b>[Personal Information Collection and Usage Agreement]</b><br><br>
+            <br>
+            <div id="privacy">
+                <b>[Personal Information Collection and Usage Agreement]</b><br><br>
                 1. Purpose: Collection of personal information for use of the site<br>
                 2. Items: ID, password, name, email, mobile phone number<br>
                 3. Retention period: retained until membership withdrawal<br>
                 (however, application history information is unidirectionally encrypted and stored for one year <br>
-                from the date of withdrawal and then destroyed.)<br>
+                from the date of withdrawal and then destroyed.)<br><br>
+                <input type="radio" name="agreement" id="agreement">&nbsp<label style="font-size:15px">I agree to the collection of personal information.</label><br>
                 <br>
-                <input type="radio" required>&nbsp<label style="font-size:15px">I agree to the collection of personal information.</label><br>
-              <input type="submit" id="submit" value="join">
-              </div>
-            <!-- 개인정보취급어쩌고 -->
-            
+                <input type="submit" id="submit" value="Join">
+              </div>            
         </form>
+        <br><br>
     </section>
     {% endblock content %}
 </body>

@@ -15,25 +15,25 @@
 
 <body>
     {% block content %}
+    <h1 style="padding:17px; background-color:#EBF5FF" id="head">Like</h1>
 
-    <section class="container-fluid">
-        <h1 style="padding:17px; background-color:#EBF5FF; text-align: center;" id="head">Results of ' {{ searchstr }} '</h1>
-        {% if products %}
-        <div class="container">
+    <section class="container text-center">
+        <div class="row">
+            {% if products %}
             <div class="row">
                 {% for product in products %}
-                <div class="col-md-3 ml-10 mr-10">
+                <div class="col-sm-4">
                     <a href="{% url 'detail' product.id %}" style="text-decoration: none; color: black;">
-                        <img src="{{ product.image.url }}" width="100%">
-                        <br>
-                        <p style="text-align: center;">{{ product.title }}<br>${{ product.price }}</p>
+                        <img src="{{ product.image.url }}" style="overflow: hidden;" width="70%" height="auto">
+                    <p style="font-size:20px; text-align:center; margin-bottom: 40px;">{{ product.title }}<br>${{ product.price }}</p>
                     </a>
                 </div>
-            {% endfor %}
+                {% endfor %}
             </div>
-            
+            {% else %}
+            <p style="font-size:40px; text-align:center; margin-top: 50px; margin-bottom: 50px;">You have No Likes!<br>Let's add one</p>
+            {% endif %}
         </div>
-        {% endif %}
     </section>
 
     {% endblock content %}
