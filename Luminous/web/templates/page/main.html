@@ -37,7 +37,7 @@
       {% for best in bests %}
       <div class="col-sm-3" style="text-align:center">
         <a href="{% url 'detail' best.id %}" style="text-decoration: none; color: black;">
-          <img src="{{ best.image.url }}" style="overflow: hidden; width:70%; height:auto;">
+          <img class="content" src="{{ best.image.url }}" style="overflow: hidden; width:70%; height:auto;">
           <p style="font-size:20px; ">{{ best.title }}<br>${{ best.price }}</p>
         </a>
       </div>
@@ -55,7 +55,7 @@
       {% for new in news %}
       <div class="col-sm-3" style="text-align:center">
         <a href="{% url 'detail' new.id %}" style="text-decoration: none; color: black;">
-          <img src="{{ new.image.url }}" style="overflow: hidden; width:70%; height:auto;">
+          <img class="content" src="{{ new.image.url }}" style="overflow: hidden; width:70%; height:auto;">
           <p style="font-size:20px; ">{{ new.title }}<br>${{ new.price }}</p>
         </a>
       </div>
@@ -63,6 +63,18 @@
       <div class="col-sm-1">
       </div>
     </div>
+    </div>
+  </section>
+
+  <!--Event-->
+  <section class="container-fluid">
+    <div class="row" style="margin-top: 70px;">
+      <div class="col-sm-6">
+        <img class="event" src="{% static 'page/img/main/jenny.jpg' %}">
+      </div>
+      <div class="col-sm-6">
+        <img class="event" src="{% static 'page/img/main/jenny3.png' %}">
+      </div>
     </div>
   </section>
 

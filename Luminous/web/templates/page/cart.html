@@ -112,14 +112,14 @@
             </tbody>
         </table>
         <div id="button">
-            <button id="buy">BUY NOW</button>
+            <a href="{% url 'buy' %}" style="text-decoration: none; color: black; width:100%;"><button id="buy" onclick="buynowalert()">BUY NOW</button></a>
         </div>
     </div>
     {% else %}
     <p style="font-size:40px; text-align:center; margin-top: 50px; margin-bottom: 50px;">Nothing to show<br>Let's add one</p>
     {% endif %}
 
-
+    <script src="{% static 'page/js/shop.js' %}"></script>
     {% endblock content %}
 </body>
 

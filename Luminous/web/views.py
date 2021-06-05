@@ -75,6 +75,14 @@ def cart_remove(request, product_id):
 
     return redirect('detail', product_id)
 
+def cart_buy(request):
+    userID = request.user.id
+    results = Cart.objects.filter(userID__icontains=userID)
+    for result in results:
+        result.delete()
+
+    return redirect('cart')
+
 def mypage(request):
     return render(request, 'page/mypage.html')
 
