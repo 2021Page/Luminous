@@ -57,6 +57,9 @@ nav img {
     border: solid 1px #EBF5FF;
     padding: 5px 10px;
 }
+#head{
+  text-align : center;
+}
 
 .fa-heart {
     color: red;
