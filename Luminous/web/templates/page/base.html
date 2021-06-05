@@ -128,25 +128,27 @@
     {% endblock content %}
 
     <br><br>
+    
     <footer class="container-fluid">
         <div style="padding-top:40px; text-align:center; font-size:15px">
             <div id="info" class="container-fluid">
                 <h2 class="text-center">CONTACT</h2>
+                <br>
                 <div class="row">
                     <div class="col-sm-5">
                         <p>LUMINOUS</p>
                         <p> 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul</p>
                         <p>02-426-5839</p>
-                        <p>luminous@rumimail.com</p>
+                        <p>luminous@lumimail.com</p>
                     </div>
                     <div class="col-sm-7">
                         <form action="location.html" method="GET">
                             <div class="row">
-                                <div class="col-sm-6 form-group">
+                                <div class="col-sm-5 form-group">
                                     <input class="form-control" id="name" name="name" placeholder="Name" type="text"
                                         required>
                                 </div>
-                                <div class="col-sm-6 form-group">
+                                <div class="col-sm-7 form-group">
                                     <input class="form-control" id="email" name="email" placeholder="Email" type="email"
                                         required>
                                 </div>
@@ -154,7 +156,7 @@
                             <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5" style="margin-top: 5px;"></textarea><br>
                             <div class="row">
                                 <div class="col-sm-12 form-group">
-                                    <button onclick="alert('submit complete')" type="submit">Send</button>
+                                    <button id="send" onclick="alert('submit complete')" type="submit">Send</button>
                                 </div>
                             </div>
                         </form>

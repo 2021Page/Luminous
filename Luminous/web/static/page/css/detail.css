@@ -1,0 +1,31 @@
+#Like{
+    width:210px;
+    height:30px;
+    background-color: #EBF5FF;
+    border-radius: 5px;
+    border: solid 1px powderblue;
+    position:relative;
+    text-align:center;
+    }
+    #Cart{
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+    .detail{
+      width:210px;
+      height:30px;
+      background-color: #EBF5FF;
+      border-radius: 5px;
+      border: solid 1px powderblue;
+      position:relative;
+      text-align:center;
+    }
+    .detailimg{
+      overflow: hidden;
+       border: 5px solid lightgray;
+        text-align:center;
+        margin:50px;width:350px;
+         height:350px;
+         height:auto;
+    }
+    

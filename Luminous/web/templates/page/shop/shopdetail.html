@@ -35,26 +35,13 @@
             position: relative;
             text-align: center;
         }
-        a, a:hover {
-            text-decoration: none; 
-            color: black; 
+
+        a,
+        a:hover {
+            text-decoration: none;
+            color: black;
         }
     </style>
-
-    <script>
-        function likealert() {
-            alert("The product has been reflected in the list of likes.");
-        }
-        function unlikealert() {
-            alert("The product has been removed in the list of likes.");
-        }
-        function cartalert() {
-            alert("The product is in the cart.");
-        }
-        function buynowalert() {
-            alert("Your order has been completed.");
-        }
-    </script>
     {% endblock %}
 </head>
 
@@ -71,21 +58,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{ product.image.url }}"
+                    <img class="detailimg" id="border" src="{{ product.image.url }}"
                         style="overflow: hidden; border: 5px solid lightgray; text-align:center; margin:50px;width:350px; height:350px; height:auto;">
                 </div>
                 <div class="col-lg-6">
                     <br>
                     {% if product.category == "nail" %}
-                    <p style="font-size:25px;"><b>LUMINOUS NAIL</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
+                    <p style="font-size:25px;"><b>LUMINOUS NAIL</b><br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br></p>
                     {% elif product.category == "pedi" %}
-                    <p style="font-size:25px;"><b>LUMINOUS PEDI</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
+                    <p style="font-size:25px;"><b>LUMINOUS PEDI</b><br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br></p>
                     {% elif product.category == "care" %}
-                    <p style="font-size:25px;"><b>LUMINOUS CARE</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
+                    <p style="font-size:25px;"><b>LUMINOUS CARE</b><br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br></p>
                     {% endif %}
-                    <hr>
-                    {% if liked == 1%}
-                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'likeremove' product.id %}">
+                    {% if liked == 1 %}
+                    <a style="text-decoration: none; color: black; width:100%;"
+                        href="{% url 'likeremove' product.id %}">
                         <button class="detail" id="Like" onclick="unlikealert()">UnLike</button>
                     </a><br>
                     {% else %}
@@ -105,6 +92,7 @@
         {% endif %}
     </section>
 
+    <script src="{% static 'page/js/shop.js' %}"></script>
     {% endblock content %}
 </body>
 

@@ -21,7 +21,8 @@
         {% if products %}
         <div class="row">
             {% for product in products %}
-            <div class="col-sm-4">
+            <div class="col-sm-4" onmouseover='OnMouseIn(this)' onmouseout='OnMouseOut(this)' onclick='onclick(this)'onmousedown='OnMouseDown(this)'>
+                <br>
                 <a href="{% url 'detail' product.id %}" style="text-decoration: none; color: black;">
                     <img src="{{ product.image.url }}" style="overflow: hidden;" width="70%" height="auto">
                     <p style="font-size:20px; text-align:center; margin-bottom: 40px;">{{ product.title }}<br>${{ product.price }}</p>
@@ -32,6 +33,7 @@
         {% endif %}
     </section>
 
+    <script src="{% static 'page/js/shop.js' %}"></script>
     {% endblock content %}
 </body>
 

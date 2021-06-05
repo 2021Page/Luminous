@@ -15,73 +15,37 @@
 
 <body>
     {% block content %}
-    <h1 style="padding:17px; background-color:#EBF5FF; text-align: center;" id="head">Location</h1>
-    <div id="map" style="margin-left:100px; margin-top:80px; margin-right:40px;width:500px; height: 500px; float:left">
-    </div>
-
-    <script>
-        function myMap() {
-            var mapCanvas = document.getElementById("map");
-            var myCenter = new google.maps.LatLng(37.51107250301698, 127.05733066064631);
-            var infowindow = new google.maps.InfoWindow({
-                content: "LUMINOUS"
-            });
-            infowindow.open(map, marker);
-            var mapOptions = {
-                center: myCenter,
-                zoom: 15
-            };
-            var map = new google.maps.Map(mapCanvas, mapOptions);
-            var star = new google.maps.MarkerImage("img/star.png", null, null, null, new google.maps.Size(55, 55));
-            var marker = new google.maps.Marker({
-                position: myCenter,
-                animation: google.maps.Animation.BOUNCE,
-                icon: star,
-            });
-            marker.setMap(map);
-
-            var infowindow = new google.maps.InfoWindow({
-                content: "LUMINOUS"
-            });
-            infowindow.open(map, marker);
-
-            var myUniversity = new google.maps.Circle({
-                center: myCenter,
-                radius: 100,
-                strokeColor: "skyblue",
-                strokeOpacity: 0.5,
-                strokeWeight: 3,
-                fillColor: "skyblue",
-                fillOpacity: 0.3
-            });
-            myUniversity.setMap(map);
-        }
-
-
-    </script>
-
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAlOjojzJqN5CEy7iGWtTTiWgCMiPUhXI&callback=myMap"></script>
-    <div style="margin-top:100px;font-size:20px">
-        <b>Address</b>: 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul<br><br>
-        <b>[Directions]</b><br><br>
-
-        -Bus customers<br>
-        Grand Intercontinental Hotel (Samsung Station Exit 5) | 23201 Stop<br>
-        Main Bus - 146, 341, 360, 333, 740, N13 (late night), N61 (late night)<br>
-        Branch Bus - 3411<br>
-        Circulating bus<br>
-        Airport Limousine - 6000<br>
-        Village Bus - Gangnam 07, Gangnam 08<br>
-        Main Bus - 1100, 2000, 2000-1, 7007, 8001, 9414, 500-2, 9303<br><br>
-
-        -Subway customers<br>
-
-        Enter the passageway directly connected to Samseong Station Exit 5 and 6 towards Samseong Station and move
-        through Millennium Square.<br>
+    <h1 style="padding:17px; background-color:#EBF5FF" id="head">Location</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5">
+                <div id="map" style="margin-left:50px; margin-top:40px; width:500px; height: 500px;"></div>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAlOjojzJqN5CEy7iGWtTTiWgCMiPUhXI&callback=myMap"></script>
+            </div>
+            <div class="col-lg-7" style="margin-top:40px;font-size:20px">
+                <b>Address</b>: 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul<br><br>
+                <b>[Directions]</b><br><br>
+        
+                -Bus customers<br>
+                Grand Intercontinental Hotel (Samsung Station Exit 5) | 23201 Stop<br>
+                Main Bus - 146, 341, 360, 333, 740, N13 (late night), N61 (late night)<br>
+                Branch Bus - 3411<br>
+                Circulating bus<br>
+                Airport Limousine - 6000<br>
+                Village Bus - Gangnam 07, Gangnam 08<br>
+                Main Bus - 1100, 2000, 2000-1, 7007, 8001, 9414, 500-2, 9303<br><br>
+        
+                -Subway customers<br>
+        
+                Enter the passageway directly connected to Samseong Station Exit 5 and 6 towards Samseong Station and move
+                through Millennium Square.<br>
+            </div>
+        </div>
     </div>
     <div style="clear:both"></div>
-        {% endblock content %}
+    
+    <script src="{% static 'page/js/location.js' %}"></script>
+    {% endblock content %}
 </body>
 
 </html>

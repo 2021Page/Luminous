@@ -35,12 +35,15 @@
                 <input type="password" class="form-control" name="password" id="password" value="{{ form.password.value|default_if_none:'' }}">
             </div>
             <div style="text-align: center;">
-                <input type="submit" id="submit" value="Login">
+                <input type="submit" id="submit" value="Login" onclick="loginalert()">
+                &nbsp;&nbsp;
                 <input type="button" id="join" value="join" onclick="gojoin();">
             </div>
         </form>
         
     </section>
+    
+    <script src="{% static 'page/js/login.js' %}"></script>
     {% endblock content %}
 </body>
 

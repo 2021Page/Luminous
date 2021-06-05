@@ -43,7 +43,7 @@ def cart(request):
     subtotal = 0
     total = 0
     for result in results:
-        subtotal += int(result.product.price)
+        subtotal += (int(result.product.price) * int(result.quantity))
     total = subtotal + 3
     context = {
         'products' : results,
@@ -65,7 +65,7 @@ def cart_add(request, product_id):
             quantity = 1
         )
         cart_item.save()
-    return redirect('..')
+    return redirect('detail', product_id)
     
 
 def cart_remove(request, product_id):
@@ -73,7 +73,7 @@ def cart_remove(request, product_id):
     cartdelete = Cart.objects.get(userID=request.user.id, product=product)
     cartdelete.delete()
 
-    return redirect('..')
+    return redirect('detail', product_id)
 
 def mypage(request):
     return render(request, 'page/mypage.html')

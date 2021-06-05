@@ -55,11 +55,13 @@
                 from the date of withdrawal and then destroyed.)<br><br>
                 <input type="radio" name="agreement" id="agreement">&nbsp<label style="font-size:15px">I agree to the collection of personal information.</label><br>
                 <br>
-                <input type="submit" id="submit" value="Join">
+                <input type="submit" id="submit" value="Join" onclick="joinalert()">
               </div>            
         </form>
         <br><br>
     </section>
+    
+    <script src="{% static 'page/js/join.js' %}"></script>
     {% endblock content %}
 </body>
 
