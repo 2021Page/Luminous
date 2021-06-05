@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.db.models import Q
-from .forms import UserForm, SearchForm
-from .models import Product, Cart
+from .forms import UserForm
+from .models import Product, Cart, Like
 from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
@@ -52,36 +54,60 @@ def cart(request):
 
 def cart_add(request, product_id):
     product = Product.objects.get(id=product_id)
-    results = Cart.objects.filter(product__icontains=product)
-    if results:
-        results.quantity += 1
-    else:
-        cart = Cart.objects.create(
+    try:
+        cart_item = Cart.objects.get(userID=request.user.id, product=product)
+        cart_item.quantity += 1
+        cart_item.save()
+    except Cart.DoesNotExist:
+        cart_item = Cart.objects.create(
             userID=request.user.id,
             product = product,
-            quantity = 1,
+            quantity = 1
         )
-    cart.save()
-    cart(request)
+        cart_item.save()
+    return redirect('..')
+    
 
 def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    cart = Cart.objects.get(userID=request.user.id, product=product)
-    cart.delete()
+    cartdelete = Cart.objects.get(userID=request.user.id, product=product)
+    cartdelete.delete()
 
-    return render(request, 'page/cart.html', context)
+    return redirect('..')
 
 def mypage(request):
     return render(request, 'page/mypage.html')
 
 def like(request):
-    results = Product.objects.filter(special__icontains="new")
+    userID = request.user.id
+    results = Like.objects.filter(userID__icontains=userID)
     context = {
         'products' : results
     }
     return render(request, 'page/like.html', context)
 
 
+def like_add(request, product_id):
+    product = Product.objects.get(id=product_id)
+    try:
+        like_item = Like.objects.get(userID=request.user.id, product=product)
+        like_item.save()
+    except Like.DoesNotExist:
+        like_item = Like.objects.create(
+            userID=request.user.id,
+            product = product
+        )
+        like_item.save()
+
+    return redirect('detail', product_id)
+    
+
+def like_remove(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    likedelete = Like.objects.get(userID=request.user.id, product=product)
+    likedelete.delete()
+
+    return redirect('detail', product_id)
 
 def howto(request):
     return render(request, 'page/howto.html')
@@ -123,8 +149,16 @@ def care(request):
 
 def detail(request, product_id):
     product = Product.objects.get(id=product_id)
+    liked = 0
+    try:
+        like_item = Like.objects.get(userID=request.user.id, product=product)
+        liked = 1
+    except Like.DoesNotExist:
+        liked = 0
+
     context = {
-        'product' : product
+        'product' : product,
+        'liked' : liked
     }
     return render(request, 'page/shop/shopdetail.html', context)
 

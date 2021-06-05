@@ -35,11 +35,18 @@
             position: relative;
             text-align: center;
         }
+        a, a:hover {
+            text-decoration: none; 
+            color: black; 
+        }
     </style>
 
     <script>
         function likealert() {
             alert("The product has been reflected in the list of likes.");
+        }
+        function unlikealert() {
+            alert("The product has been removed in the list of likes.");
         }
         function cartalert() {
             alert("The product is in the cart.");
@@ -63,11 +70,11 @@
         {% endif %}
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-lg-6">
                     <img src="{{ product.image.url }}"
                         style="overflow: hidden; border: 5px solid lightgray; text-align:center; margin:50px;width:350px; height:350px; height:auto;">
                 </div>
-                <div class="col-md-6">
+                <div class="col-lg-6">
                     <br>
                     {% if product.category == "nail" %}
                     <p style="font-size:25px;"><b>LUMINOUS NAIL</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
@@ -77,8 +84,18 @@
                     <p style="font-size:25px;"><b>LUMINOUS CARE</b><br>{{ product.title }}<br><br>PRICE : ${{ product.price }}<br><br></p>
                     {% endif %}
                     <hr>
-                    <input type="submit" class="detail" id="Like" value="Like" onclick="likealert()"><br>
-                    <button class="detail" id="Cart" onclick="cartalert()"><a style="text-decoration: none; color: black;" href="{% url 'cartadd' product.id %}">Cart</a></button><br>
+                    {% if liked == 1%}
+                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'likeremove' product.id %}">
+                        <button class="detail" id="Like" onclick="unlikealert()">UnLike</button>
+                    </a><br>
+                    {% else %}
+                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'likeadd' product.id %}">
+                        <button class="detail" id="Like" onclick="likealert()">Like</button>
+                    </a><br>
+                    {% endif %}
+                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'cartadd' product.id %}">
+                        <button class="detail" id="Cart" onclick="cartalert()">Cart</button>
+                    </a><br>
                     <input type="submit" class="detail" id="Buynow" value="Buynow" onclick="buynowalert()"><br>
                     <hr>
                 </div>

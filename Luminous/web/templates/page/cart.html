@@ -31,6 +31,19 @@
         td {
             line-height: 40px;
         }
+
+        .delete {
+            background-color: white;
+            width: 80px;
+            height: 30px;
+            font-size: 10pt;
+            line-height: 20px;
+        }
+        
+        a, a:hover {
+            text-decoration: none; 
+            color: black; 
+        }
     </style>
     {% endblock %}
 </head>
@@ -50,6 +63,7 @@
                     <th scope="col">Product</th>
                     <th scope="col">Product Amount</th>
                     <th scope="col">Qty</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,13 +72,13 @@
                 <tr class="table">
                     <th scope="row"><img src="{{ item.product.image.url }}" width="40" height="40" alt="nail"></th>
                     <td>
-                        <a href="{% url 'detail' item.product.id %}" style="text-decoration: none; color: black; display: table; width: 100%;">
+                        <a href="{% url 'detail' item.product.id %}" style="display: table; width: 100%;">
                             {{ item.product.title }}
                         </a>
                     </td>
-
                     <td id='price' value='{{ item.product.price }}'>${{ item.product.price }}</td>
                     <td>{{ item.quantity }}</td>
+                    <td> <button class="delete"><a href="{% url 'cartremove' item.product.id %}" style="display: table; width: 100%;">Delete</a></button></td>
                 </tr>
                 {% endfor %}
 
@@ -102,8 +116,7 @@
         </div>
     </div>
     {% else %}
-    <p style="font-size:40px; text-align:center; margin-top: 50px; margin-bottom: 50px;">Nothing to show<br>Let's add
-        one</p>
+    <p style="font-size:40px; text-align:center; margin-top: 50px; margin-bottom: 50px;">Nothing to show<br>Let's add one</p>
     {% endif %}
 
 

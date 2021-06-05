@@ -22,11 +22,11 @@
         <div class="row">
             {% if products %}
             <div class="row">
-                {% for product in products %}
+                {% for item in products %}
                 <div class="col-sm-4">
-                    <a href="{% url 'detail' product.id %}" style="text-decoration: none; color: black;">
-                        <img src="{{ product.image.url }}" style="overflow: hidden;" width="70%" height="auto">
-                    <p style="font-size:20px; text-align:center; margin-bottom: 40px;">{{ product.title }}<br>${{ product.price }}</p>
+                    <a href="{% url 'detail' item.product.id %}" style="text-decoration: none; color: black;">
+                        <img src="{{ item.product.image.url }}" style="overflow: hidden;" width="70%" height="auto">
+                    <p style="font-size:20px; text-align:center; margin-bottom: 40px;">{{ item.product.title }}<br>${{ item.product.price }}</p>
                     </a>
                 </div>
                 {% endfor %}

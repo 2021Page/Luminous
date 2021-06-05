@@ -14,8 +14,8 @@ urlpatterns = [
     path('cart/remove/<int:product_id>', views.cart_remove, name='cartremove'),
     path('mypage/', views.mypage, name='mypage'),
     path('likes/',views.like, name='like'),
-    #path('likes/add/<int:product_id>', views.like_add, name='likeadd'),
-    #path('likes/remove/<int:product_id>', views.like_remove, name='likeremove'),
+    path('likes/add/<int:product_id>', views.like_add, name='likeadd'),
+    path('likes/remove/<int:product_id>', views.like_remove, name='likeremove'),
 
     path('howto/', views.howto, name='howto'), 
     path('shop/new/', views.new, name='new'), 
