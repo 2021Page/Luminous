@@ -128,7 +128,37 @@
     {% endblock content %}
 
     <br><br>
-    
+    <div style=" margin-top:80px; text-align:center; font-size:15px">
+  <div id = "info" class="container-fluid">
+    <h2 class="text-center">CONTACT</h2>
+    <div class="row">
+      <div class="col-sm-5">
+        <p>LUMINOUS</p>
+        <p> 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul</p>
+        <p>02-426-5839</p>
+        <p>luminous@lumimail.com</p>
+      </div>
+      <div class="col-sm-7">
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <input class="form-control" style="width:70%" id="email" name="email" placeholder="Email" type="email" required>
+          </div>
+          <div class="col-sm-2 form-group">
+          </div>
+        </div>
+        <textarea class="form-control" style="width:68%" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+        <div class="row">
+          <div class="col-sm-8 form-group">
+            <button type = "button" id="send" onclick = "func()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!--
     <footer class="container-fluid">
         <div style="padding-top:40px; text-align:center; font-size:15px">
             <div id="info" class="container-fluid">
@@ -163,11 +193,11 @@
                                 </div>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
-            <br>
+            <br>-->
     </footer>
 </body>
 </html>
