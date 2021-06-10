@@ -10,6 +10,7 @@
 
     {% load static %}
     {% block extrahead %}
+    <script src="{% static 'page/js/location.js' %}"></script>
     {% endblock %}
 </head>
 
@@ -25,7 +26,7 @@
             <div class="col-lg-7" style="margin-top:40px;font-size:20px">
                 <b>Address</b>: 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul<br><br>
                 <b>[Directions]</b><br><br>
-        
+
                 -Bus customers<br>
                 Grand Intercontinental Hotel (Samsung Station Exit 5) | 23201 Stop<br>
                 Main Bus - 146, 341, 360, 333, 740, N13 (late night), N61 (late night)<br>
@@ -34,17 +35,15 @@
                 Airport Limousine - 6000<br>
                 Village Bus - Gangnam 07, Gangnam 08<br>
                 Main Bus - 1100, 2000, 2000-1, 7007, 8001, 9414, 500-2, 9303<br><br>
-        
+
                 -Subway customers<br>
-        
+
                 Enter the passageway directly connected to Samseong Station Exit 5 and 6 towards Samseong Station and move
                 through Millennium Square.<br>
             </div>
         </div>
     </div>
     <div style="clear:both"></div>
-    
-    <script src="{% static 'page/js/location.js' %}"></script>
     {% endblock content %}
 </body>
 
