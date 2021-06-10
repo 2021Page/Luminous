@@ -126,44 +126,17 @@
 
     {% block content %}
     {% endblock content %}
-
-    <br><br>
-    <div style=" margin-top:80px; text-align:center; font-size:15px">
-  <div id = "info" class="container-fluid">
-    <h2 class="text-center">CONTACT</h2>
-    <div class="row">
-      <div class="col-sm-5">
-        <p>LUMINOUS</p>
-        <p> 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul</p>
-        <p>02-426-5839</p>
-        <p>luminous@lumimail.com</p>
-      </div>
-      <div class="col-sm-7">
-        <div class="row">
-          <div class="col-sm-4 form-group">
-            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-          </div>
-          <div class="col-sm-6 form-group">
-            <input class="form-control" style="width:70%" id="email" name="email" placeholder="Email" type="email" required>
-          </div>
-          <div class="col-sm-2 form-group">
-          </div>
+    <div class="message">
+        <div class="btn-group-vertical">
+            <button type="button" class="btn" onclick="goTop();">top</button>
+            <button type="button" class="btn" onclick="goBottom();">bottom</button>
         </div>
-        <textarea class="form-control" style="width:68%" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-        <div class="row">
-          <div class="col-sm-8 form-group">
-            <button type = "button" id="send" onclick = "func()">Send</button>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-    <!--
-    <footer class="container-fluid">
-        <div style="padding-top:40px; text-align:center; font-size:15px">
+
+    <footer>
+        <div style=" margin-top:80px; text-align:center; font-size:15px">
             <div id="info" class="container-fluid">
-                <h2 class="text-center">CONTACT</h2>
-                <br>
+                <h2 class="text-center" style="padding: 10px 0;">CONTACT</h2>
                 <div class="row">
                     <div class="col-sm-5">
                         <p>LUMINOUS</p>
@@ -172,32 +145,29 @@
                         <p>luminous@lumimail.com</p>
                     </div>
                     <div class="col-sm-7">
-                        <form action="" method="GET">
-                            <div class="row">
-                                <div class="col-sm-3 form-group">
-                                    <input class="form-control" id="name" name="name" placeholder="Name" type="text"
-                                        required>
-                                </div>
-                                <div class="col-sm-5 form-group">
-                                    <input class="form-control" id="email" name="email" placeholder="Email" type="email"
-                                        required>
-                                </div>
-                                <div class="col-sm-4"></div>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5" style="margin-top: 5px;"></textarea><br>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-8 form-group">
-                                    <button id="send" onclick="func()" type="submit">Send</button>
-                                </div>
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" style="width:70%" id="email" name="email" placeholder="Email"
+                                    type="email" required>
                             </div>
-                        </form>
-
+                            <div class="col-sm-2 form-group">
+                            </div>
+                        </div>
+                        <textarea class="form-control" style="width:68%" id="comments" name="comments" placeholder="Comment"
+                            rows="5"></textarea><br>
+                        <div class="row">
+                            <div class="col-sm-8 form-group">
+                                <button type="button" id="send" onclick="func()">Send</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <br>-->
+        </div>
     </footer>
+    <div id="bottom"></div>
 </body>
 </html>

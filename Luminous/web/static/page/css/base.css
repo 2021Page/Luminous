@@ -65,6 +65,23 @@ nav img {
     color: red;
 }
 
+.message {
+    width: 82px;
+    height: auto;
+    top: 80%;
+    right: 5%;
+    text-align: center;
+    background-color: rgb(128, 146, 199);
+    color: white;
+    padding: 5px 20px;
+    position: fixed;
+    z-index: 10;
+}
+
+.message .btn {
+    transform: translateX(-22%);
+}
+
 footer {
     background-color: aliceblue;
 }
