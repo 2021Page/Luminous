@@ -9,7 +9,7 @@ function myMap() {
     zoom: 15
   };
   var map = new google.maps.Map(mapCanvas, mapOptions);
-  var star = new google.maps.MarkerImage("img/star.png", null, null, null, new google.maps.Size(55,55));
+  var star = new google.maps.MarkerImage("/static/page/img/star.png", null, null, null, new google.maps.Size(55,55));
   var marker = new google.maps.Marker({
   position:myCenter,
   animation:google.maps.Animation.BOUNCE,

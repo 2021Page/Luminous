@@ -56,6 +56,9 @@ def cart(request):
     return render(request, 'page/cart.html', context)
 
 def cart_add(request, product_id):
+    userID = request.user.id
+    if not userID:
+        return redirect('detail', product_id)
     product = Product.objects.get(id=product_id)
     try:
         cart_item = Cart.objects.get(userID=request.user.id, product=product)
@@ -72,6 +75,9 @@ def cart_add(request, product_id):
     
 
 def cart_remove(request, product_id):
+    userID = request.user.id
+    if not userID:
+        return redirect('detail', product_id)
     product = get_object_or_404(Product, id=product_id)
     cartdelete = Cart.objects.get(userID=request.user.id, product=product)
     cartdelete.delete()
@@ -102,6 +108,9 @@ def like(request):
 
 
 def like_add(request, product_id):
+    userID = request.user.id
+    if not userID:
+        return redirect('detail', product_id)
     product = Product.objects.get(id=product_id)
     try:
         like_item = Like.objects.get(userID=request.user.id, product=product)
@@ -117,6 +126,9 @@ def like_add(request, product_id):
     
 
 def like_remove(request, product_id):
+    userID = request.user.id
+    if not userID:
+        return redirect('detail', product_id)
     product = get_object_or_404(Product, id=product_id)
     likedelete = Like.objects.get(userID=request.user.id, product=product)
     likedelete.delete()
