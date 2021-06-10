@@ -20,5 +20,4 @@ function confirm() {
   if (pw.length < 8 || pwcon.length < 8) {
     alert("Password is 8 characters or less. Would you still like to proceed?");
   }
-
 }

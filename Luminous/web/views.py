@@ -39,6 +39,9 @@ def logout(request):
 
 def cart(request):
     userID = request.user.id
+    if not userID:
+        results = ""
+        return render(request, 'page/cart.html')
     results = Cart.objects.filter(userID__icontains=userID)
     subtotal = 0
     total = 0
@@ -73,7 +76,7 @@ def cart_remove(request, product_id):
     cartdelete = Cart.objects.get(userID=request.user.id, product=product)
     cartdelete.delete()
 
-    return redirect('detail', product_id)
+    return redirect('cart')
 
 def cart_buy(request):
     userID = request.user.id
@@ -88,6 +91,9 @@ def mypage(request):
 
 def like(request):
     userID = request.user.id
+    if not userID:
+        results = ""
+        return render(request, 'page/like.html')
     results = Like.objects.filter(userID__icontains=userID)
     context = {
         'products' : results

@@ -20,27 +20,35 @@
     <section class="container join">
         <form method="POST">
             {% csrf_token %}
-            {% include "form_errors.html" %}
             <div class="form-group">
                 <label>ID</label>
                 <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
             </div>
-            <div class="form-group">
-                <label>PW</label>
-                <input type="password" class="form-control" name="password1" id="password1" placeholder="Please enter at least 8 characters." value="{{ form.password1.value|default_if_none:'' }}">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>PW</label>
+                        <input type="password" class="form-control" name="password1" id="password1" placeholder="Please enter at least 8 characters." value="{{ form.password1.value|default_if_none:'' }}">
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>PW Confirm</label>
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="Please enter at least 8 characters." value="{{ form.password2.value|default_if_none:'' }}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" id="confirm" value="Confirm" onclick="confirm()">
+                </div>
             </div>
-            <div class="form-group">
-                <label>PW Confirm</label>
-                <input type="password" class="form-control" name="password2" id="password2" placeholder="Please enter at least 8 characters." value="{{ form.password2.value|default_if_none:'' }}">
-                <input type="button" id="confirm" value="Confirm" onclick="confirm()">
-            </div>
+
             <div class="form-group">
                 <label>NAME</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ form.name.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>PHONE</label>
-                <input type="tel" class="form-control" name="phone" id="phone" value="{{ form.phone.value|default_if_none:'' }}">
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="010-0000-0000" value="{{ form.phone.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>ADDRESS</label>
