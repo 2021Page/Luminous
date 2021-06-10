@@ -22,6 +22,7 @@
 
         {% if products %}
         <div class="row">
+            <div class="col-sm-4"></div>
             {% for product in products %}
             <div class="col-sm-4" onmouseover='OnMouseIn(this)' onmouseout='OnMouseOut(this)' onclick='onclick(this)'onmousedown='OnMouseDown(this)'>
                 <br>
@@ -31,6 +32,7 @@
                 </a>
             </div>
             {% endfor %}
+            <div class="col-sm-4"></div>
         </div>
         {% endif %}
     </section>
