@@ -1,0 +1,49 @@
+{% extends 'page/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+
+    {% load static %}
+    {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'page/css/shop.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <h1 style="padding:17px; background-color:#EBF5FF" id = "head">Shop_Nail</h1><br>
+
+    <section class="container-fluid">
+        <div id= "box">
+          <image name="targetImg" src="{% static 'page/img/choice1.png' %}" style="width:300px;height:300px;">
+            <br>
+          <input type="button" value=" Press ! " onclick="image_onclick();" style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
+        </div>
+    </section>
+
+    <section class="container text-center">
+        {% if products %}
+        <div class="row">
+            {% for product in products %}
+            <div class="col-sm-4" onmouseover='OnMouseIn(this)' onmouseout='OnMouseOut(this)' onclick='onclick(this)'onmousedown='OnMouseDown(this)'>
+                <br>
+                <a href="{% url 'detail' product.id %}" style="text-decoration: none; color: black;">
+                    <img src="{{ product.image.url }}" style="overflow: hidden;" width="70%" height="auto">
+                    <p style="font-size:20px; text-align:center; margin-bottom: 40px;">{{ product.title }}<br>${{ product.price }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </section>
+
+    <script src="{% static 'page/js/shop.js' %}"></script>
+    {% endblock content %}
+</body>
+
+</html>

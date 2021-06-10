@@ -1,0 +1,42 @@
+h1{
+  text-align: center;
+}
+#box{
+  margin-top: 80px;
+  margin-left:100px;
+  margin-right:100px;
+}
+.a{
+  font-weight: bold;
+  text-decoration: none;
+  color:black;
+  text-shadow: 1px 1px 2px rgb(128, 146, 199);
+}
+.a:hover{
+    color:black;
+}
+.mainMenu{
+    margin-top: 80px;
+    margin-left:100px;
+    margin-right:100px;
+    display: block;
+    overflow: hidden;
+}
+.line{
+    letter-spacing:1px;
+    padding-top: 15px;
+    text-align: center;
+	  border-bottom:1.5px solid rgb(128, 146, 199);
+    list-style: none;
+}
+.subMenu{
+    margin-left: 30px;
+    padding-top: 15px;
+    background: white;
+    overflow: hidden;
+    transition: max-height 1.0s;
+    max-height: 0;
+}
+.line:target .subMenu{
+    max-height: 35em;
+}
