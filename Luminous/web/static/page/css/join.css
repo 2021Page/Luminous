@@ -13,6 +13,17 @@
   text-align:center;
 }
 
+#confirm {
+    margin-top: 10px;
+    width:100px;
+    height:30px;
+    background-color: #EBF5FF;
+    border-radius: 5px;
+    border: solid 1px powderblue;
+    position:relative;
+    text-align:center;
+  }
+
 hr {
     margin-bottom: 10px;
 }

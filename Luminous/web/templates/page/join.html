@@ -27,11 +27,12 @@
             </div>
             <div class="form-group">
                 <label>PW</label>
-                <input type="password" class="form-control" name="password1" id="password1" value="{{ form.password1.value|default_if_none:'' }}">
+                <input type="password" class="form-control" name="password1" id="password1" placeholder="Please enter at least 8 characters." value="{{ form.password1.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>PW Confirm</label>
-                <input type="password" class="form-control" name="password2" id="password2" value="{{ form.password2.value|default_if_none:'' }}">
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="Please enter at least 8 characters." value="{{ form.password2.value|default_if_none:'' }}">
+                <input type="button" id="confirm" value="Confirm" onclick="confirm()">
             </div>
             <div class="form-group">
                 <label>NAME</label>
