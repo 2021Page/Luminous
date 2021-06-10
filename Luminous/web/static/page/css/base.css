@@ -82,7 +82,7 @@ footer .img {
     padding:40px;
     text-align:center;
   }
-  
+
 #send{
     background-color: white;
     color:black;
@@ -93,6 +93,11 @@ footer .img {
     outline: none;
 }
   
+#info{
+  border: 1px solid black;
+  background-color: #EBF5FF;
+  width:100%;
+}
 
 @media screen and (max-width: 1000px) {
     nav {

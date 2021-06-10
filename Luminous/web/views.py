@@ -72,7 +72,7 @@ def cart_add(request, product_id):
         )
         cart_item.save()
     return redirect('detail', product_id)
-    
+
 
 def cart_remove(request, product_id):
     userID = request.user.id
@@ -123,7 +123,7 @@ def like_add(request, product_id):
         like_item.save()
 
     return redirect('detail', product_id)
-    
+
 
 def like_remove(request, product_id):
     userID = request.user.id
