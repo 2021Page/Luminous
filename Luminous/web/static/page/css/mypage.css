@@ -1,3 +1,7 @@
+a, a:hover {
+  color: black;
+  text-decoration: none;
+}
 .memberbox{
  margin: 100px;
  background-color:white;

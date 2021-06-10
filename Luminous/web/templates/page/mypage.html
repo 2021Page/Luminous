@@ -23,14 +23,14 @@
     <div style="border-style:dashed; margin:60px 70px 0px 70px;">
         <div class="container-fluid">
             <div class="row" style="margin:50px 120px 50px 120px;">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <span><img src="{% static 'page/img/mypagelogo.png' %}" alt="" width="100%"></span>
                 </div>
                 <div class="col-md-5">
                     <p id="welcome">Welcome to Luminous!</p>
-                    <button class="btn btn-outline-info btn-lg" onclick="location.href='#.html'" id="movelike">Move to LIKE</button>
+                    <button class="btn btn-outline-info btn-lg" id="movelike"><a href="{% url 'like' %}">Move to LIKE</a></button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h4 id="point">My Point | 200 <br> My Coupon | 2 </h4>
                 </div>
             </div>
