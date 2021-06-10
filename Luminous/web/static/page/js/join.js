@@ -13,11 +13,14 @@ function joinalert() {
   }
 }
 
-function confirm() {
+function con() {
   var pw = document.getElementById("password1").value;
   var pwcon = document.getElementById("password2").value;
 
   if (pw.length < 8 || pwcon.length < 8) {
     alert("Password is 8 characters or less. Would you still like to proceed?");
+  }
+  else{
+    alert("This is an acceptable password.");
   }
 }

@@ -10,6 +10,7 @@
     {% load static %}
     {% block extrahead %}
     <title>Join</title>
+    <script src="{% static 'page/js/join.js' %}"></script>
     <link rel="stylesheet" href="{% static 'page/css/join.css' %}">
     {% endblock %}
 </head>
@@ -38,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <input type="button" id="confirm" value="Confirm" onclick="confirm()">
+                    <input type="submit" style="" id="confirm" value="Confirm" onclick="con()">
                 </div>
             </div>
 
@@ -65,12 +66,11 @@
                 <input type="radio" name="agreement" id="agreement">&nbsp<label style="font-size:15px">I agree to the collection of personal information.</label><br>
                 <br>
                 <input type="submit" id="submit" value="Join" onclick="joinalert()">
-              </div>            
+              </div>
         </form>
         <br><br>
     </section>
-    
-    <script src="{% static 'page/js/join.js' %}"></script>
+
     {% endblock content %}
 </body>
 
