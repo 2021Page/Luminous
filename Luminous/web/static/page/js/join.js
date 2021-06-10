@@ -18,7 +18,7 @@ function con() {
   var pwcon = document.getElementById("password2").value;
 
   if (pw.length < 8 || pwcon.length < 8) {
-    alert("Password is 8 characters or less. Would you still like to proceed?");
+    alert("Password is 8 characters or less. Please use another password.");
   }
   else{
     alert("This is an acceptable password.");
