@@ -6,8 +6,8 @@ function drawChart() {
  var data = google.visualization.arrayToDataTable([
    ['Event Name', 'Participation Rate'],
    ['New Member Event',  80,],
-   ['Ruminous SNS Event',  45],
-   ['Ruminous Kakao Channel Addition Event',  30]
+   ['Luminous SNS Event',  45],
+   ['Luminous Kakao Channel Addition Event',  30]
 
 ]);
 
