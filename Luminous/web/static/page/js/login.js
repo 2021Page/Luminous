@@ -14,3 +14,7 @@ function loginalert() {
     alert("Welcome to Luminous <" + id + ">");
   }
 }
+
+function gojoin() {
+    location.href="{% url 'join' %}";
+}
