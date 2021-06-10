@@ -26,7 +26,7 @@ def join(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = raw_password)
-            return render(request, 'page/login.html')
+            return redirect('login')
     else:
         form = UserForm()
     return render(request, 'page/join.html', {'form': form})
