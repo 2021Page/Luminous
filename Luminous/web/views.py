@@ -6,12 +6,25 @@ from django.db.models import Q
 from .forms import UserForm
 from .models import Product, Cart, Like
 from django.core.exceptions import ObjectDoesNotExist
+import pymysql
 
 # Create your views here.
 
 def main(request):
     news = Product.objects.filter(special__icontains="new")[:3]
     bests = Product.objects.filter(special__icontains="best")[:3]
+    
+    con = pymysql.connect(host='localhost', user='user', password='1234', db='luminous', charset='utf8')
+    curs = con.cursor()
+    sql = "SELECT * FROM testTable"
+    curs.execute(sql)
+    data = curs.fetchall()
+
+    con.close()
+
+    if data:
+        print(data[0])
+    
     context = {
         'news' : news,
         'bests' : bests
