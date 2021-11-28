@@ -86,6 +86,9 @@ WSGI_APPLICATION = 'Luminous.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+f = open('db.json')
+data = json.load(f)
+
 DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -94,19 +97,11 @@ DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.mysql',
         'NAME':'luminous',
-        'USER':'user',
-        'PASSWORD':'1234',
+        'USER':data['db_id'],
+        'PASSWORD':data['db_pw'],
         'HOST':'localhost',
         'PORT':'3306',
     }
-    # 'default': {
-    #     'ENGINE':'django.db.backends.mysql',
-    #     'NAME':'luminous',
-    #     'USER':'root',
-    #     'PASSWORD':'gh920103*',
-    #     'HOST':'localhost',
-    #     'PORT':'3306',
-    # } ##for migration
 }
 
 
