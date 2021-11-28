@@ -7,9 +7,15 @@ from .forms import *
 from django.contrib.auth.models import User as django_user
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
-from pymysql import *
+import pymysql
+import json
 
 # Create your views here.
+def open_db_info():
+    f = open('db.json')
+    data = json.load(f)
+    print(data)
+    return data
 
 def main(request):
     news = Product.objects.filter(detail_category__icontains="new")[:3]
@@ -110,7 +116,8 @@ def cart_buy(request):
 
 def mypage(request):
     userID = request.user.id
-    con = pymysql.connect(host='localhost', user='user', password='1234', db='luminous', charset='utf8')
+    dbinfo = open_db_info()
+    con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
     sql = "SELECT * FROM testTable"
     curs.execute(sql)
@@ -215,7 +222,7 @@ def detail(request, product_id):
 
 
 def event(request):
-    con = pymysql.connect(host='localhost', user='user', password='1234', db='luminous', charset='utf8')
+    con = pymysql.connect(host='localhost', user=db_id, password=db_pw, db='luminous', charset='utf8')
     curs = con.cursor()
     sql = "SELECT * FROM testTable"
     curs.execute(sql)
