@@ -109,6 +109,12 @@ def cart_buy(request):
 
 def mypage(request):
     userID = request.user.id
+    con = pymysql.connect(host='localhost', user='user', password='1234', db='luminous', charset='utf8')
+    curs = con.cursor()
+    sql = "SELECT * FROM testTable"
+    curs.execute(sql)
+    data = curs.fetchall()
+    con.close()
     return render(request, 'page/mypage.html')
 
 def like(request):
@@ -208,6 +214,12 @@ def detail(request, product_id):
 
 
 def event(request):
+    con = pymysql.connect(host='localhost', user='user', password='1234', db='luminous', charset='utf8')
+    curs = con.cursor()
+    sql = "SELECT * FROM testTable"
+    curs.execute(sql)
+    data = curs.fetchall()
+    con.close()
     return render(request, 'page/event.html')
 
 def faq(request):
