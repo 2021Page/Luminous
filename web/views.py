@@ -220,6 +220,9 @@ def detail(request, product_id):
     }
     return render(request, 'page/shop/shopdetail.html', context)
 
+def detail_buy(request, product_id):
+    
+    return redirect('detail')
 
 def event(request):
     dbinfo = open_db_info()
