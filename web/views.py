@@ -23,29 +23,29 @@ def main(request):
 def join(request):
     if request.method == "POST":
         joinform = JoinForm(request.POST)
-        form = UserForm(request.POST)
-        if joinform.is_valid() and form.is_valid():
+        userform = UserForm(request.POST)
+        print(joinform.is_valid(), " ", userform.is_valid())
+        if joinform.is_valid():
             username = joinform.cleaned_data.get('username')
             raw_password = joinform.cleaned_data.get('password1')
             new_user = User.objects.create(
             user_id = username,
             password = raw_password,
-            user_name = form.cleaned_data.get('name'),
-            email = form.cleaned_data.get('email'),
+            user_name = userform.cleaned_data.get('name'),
+            email = userform.cleaned_data.get('email'),
             point = 0,
-            phone = form.cleaned_data.get('phone'),
-            city = form.cleaned_data.get('city'),
-            gu = form.cleaned_data.get('gu'),
-            zipcode = form.cleaned_data.get('zipcode')
+            phone = userform.cleaned_data.get('phone'),
+            city = userform.cleaned_data.get('city'),
+            gu = userform.cleaned_data.get('gu'),
+            zipcode = userform.cleaned_data.get('zipcode')
             )
             new_user.save()
             joinform.save()
-            authenticate(username = username, password = raw_password)
             return redirect('login')
     else:
         form = JoinForm()
         userform = UserForm()
-    return render(request, 'page/join.html', {'form': form})
+    return render(request, 'page/join.html', {'form': form, 'userform':userform})
 
 def login(request):
     return render(request, 'page/login.html')
@@ -153,7 +153,7 @@ def like_remove(request, product_id):
     return redirect('detail', product_id)
 
 def howto(request):
-    return render(request, 'page/howto.html', context)
+    return render(request, 'page/howto.html')
 
 def new(request):
     results = Product.objects.filter(detail_category__icontains="new")
@@ -208,13 +208,13 @@ def detail(request, product_id):
 
 
 def event(request):
-    return render(request, 'page/event.html', context)
+    return render(request, 'page/event.html')
 
 def faq(request):
-    return render(request, 'page/faq.html', context)
+    return render(request, 'page/faq.html')
 
 def location(request):
-    return render(request, 'page/location.html', context)
+    return render(request, 'page/location.html')
 
 def result(request):
     search = request.GET.get('searchstr')

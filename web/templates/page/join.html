@@ -45,27 +45,27 @@
 
             <div class="form-group">
                 <label>NAME</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ Userform.name.value|default_if_none:'' }}">
+                <input type="text" class="form-control" name="name" id="name" value="{{ userform.name.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>E-MAIL</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="010-0000-0000" value="{{ Userform.phone.value|default_if_none:'' }}">
+                <input type="email" class="form-control" name="email" id="email" placeholder="aaaa@gmail.com" value="{{ userform.phone.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>PHONE</label>
-                <input type="tel" class="form-control" name="phone" id="phone" placeholder="010-0000-0000" value="{{ Userform.phone.value|default_if_none:'' }}">
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="010-0000-0000" value="{{ userform.phone.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>ADDRESS</label>
-                <input type="text" class="form-control" name="city" id="city" value="{{ Userform.city.value|default_if_none:'' }}">
+                <input type="text" class="form-control" name="city" id="city" value="{{ userform.city.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>DETAIL ADDRESS</label>
-                <input type="text" class="form-control" name="gu" id="gu" value="{{ Userform.gu.value|default_if_none:'' }}">
+                <input type="text" class="form-control" name="gu" id="gu" value="{{ userform.gu.value|default_if_none:'' }}">
             </div>
             <div class="form-group">
                 <label>ZIP CODE</label>
-                <input type="number" class="form-control" name="zipcode" id="zipcode" value="{{ Userform.zipcode.value|default_if_none:'' }}">
+                <input type="number" class="form-control" name="zipcode" id="zipcode" value="{{ userform.zipcode.value|default_if_none:'' }}">
             </div>
             <br>
             <div id="privacy">
