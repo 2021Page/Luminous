@@ -222,7 +222,7 @@ def detail(request, product_id):
 
 def detail_buy(request, product_id):
     
-    return redirect('detail')
+    return redirect('detail', product_id)
 
 def event(request):
     dbinfo = open_db_info()
