@@ -7,6 +7,7 @@ from .forms import *
 from django.contrib.auth.models import User as django_user
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
+from pymysql import *
 
 # Create your views here.
 
