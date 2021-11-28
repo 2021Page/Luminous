@@ -127,6 +127,9 @@ def mypage(request):
     sql2 = "SELECT * FROM luminous.coupon WHERE user_ID='"+userID+"'"
     curs.execute(sql2)
     data2 = curs.fetchall()
+    sql3 = "SELECT order_Date, order_product, total_Price, order_Status FROM luminous.order_info WHERE user_ID='"+userID+"'"
+    curs.execute(sql3)
+    data3 = curs.fetchall()
     con.close()
     context = {
         'point' : data[0][4],
