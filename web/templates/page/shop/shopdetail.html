@@ -57,7 +57,7 @@
                     <a style="text-decoration: none; color: black; width:100%;" href="{% url 'cartadd' product.product_id %}">
                         <button class="detail" id="Cart" onclick="cartalert()">Cart</button>
                     </a><br>
-                    <input type="button" class="detail" id="Buynow" value="Buynow" onclick="buynowalert()"><br>
+                    <a href="{% url 'detail_buy' product.product_id%}"><input type="button" class="detail" id="Buynow" value="Buynow" onclick="buynowalert()"></a><br>
                     <hr>
                 </div>
             </div>
