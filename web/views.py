@@ -22,9 +22,9 @@ def main(request):
 
 def join(request):
     if request.method == "POST":
-        joinform = JoinForm(request.POST)
-        userform = UserForm(request.POST)
-        print(joinform.is_valid(), " ", userform.is_valid())
+        joinform = JoinForm(request.POST, request.FILES)
+        userform = UserForm(request.POST, request.FILES)
+        print("\n\n", joinform.is_valid(), " ", userform.is_valid(), "\n\n")
         if joinform.is_valid():
             username = joinform.cleaned_data.get('username')
             raw_password = joinform.cleaned_data.get('password1')
