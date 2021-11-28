@@ -35,8 +35,8 @@
     <div class="row">
       {% for best in bests %}
       <div class="col-sm-4" style="text-align:center">
-        <a href="{% url 'detail' best.id %}" style="text-decoration: none; color: black;">
-          <img class="content" src="{{ best.image.url }}" style="overflow: hidden; width:70%; height:auto;">
+        <a href="{% url 'detail' best.product_id %}" style="text-decoration: none; color: black;">
+          <img class="content" src="{{ best.image }}" style="overflow: hidden; width:70%; height:auto;">
           <p style="font-size:20px; ">{{ best.title }}<br>${{ best.price }}</p>
         </a>
       </div>
@@ -50,8 +50,8 @@
     <div class="row">
       {% for new in news %}
       <div class="col-sm-4" style="text-align:center">
-        <a href="{% url 'detail' new.id %}" style="text-decoration: none; color: black;">
-          <img class="content" src="{{ new.image.url }}" style="overflow: hidden; width:70%; height:auto;">
+        <a href="{% url 'detail' new.product_id %}" style="text-decoration: none; color: black;">
+          <img class="content" src="{{ new.image }}" style="overflow: hidden; width:70%; height:auto;">
           <p style="font-size:20px; ">{{ new.title }}<br>${{ new.price }}</p>
         </a>
       </div>

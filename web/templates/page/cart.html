@@ -37,15 +37,15 @@
                 {% for item in products %}
 
                 <tr class="table">
-                    <th scope="row"><img src="{{ item.product.image.url }}" width="40" height="40" alt="nail"></th>
+                    <th scope="row"><img src="{{ item.product.image }}" width="40" height="40" alt="nail"></th>
                     <td>
-                        <a href="{% url 'detail' item.product.id %}" style="display: table; width: 100%;">
+                        <a href="{% url 'detail' item.product_id %}" style="display: table; width: 100%;">
                             {{ item.product.title }}
                         </a>
                     </td>
                     <td id='price' value='{{ item.product.price }}'>${{ item.product.price }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td> <button class="delete"><a href="{% url 'cartremove' item.product.id %}" style="display: table; width: 100%;">Delete</a></button></td>
+                    <td> <button class="delete"><a href="{% url 'cartremove' item.product_id %}" style="display: table; width: 100%;">Delete</a></button></td>
                 </tr>
                 {% endfor %}
 

@@ -20,6 +20,9 @@ function con() {
   if (pw.length < 8 || pwcon.length < 8) {
     alert("Password is 8 characters or less. Please use another password.");
   }
+  else if(pw != pwcon){
+    alert("Password and password comfirmation is not same.")
+  }
   else{
     alert("This is an acceptable password.");
   }

@@ -23,8 +23,8 @@
             <div class="row">
                 {% for product in products %}
                 <div class="col-md-3 ml-10 mr-10">
-                    <a href="{% url 'detail' product.id %}" style="text-decoration: none; color: black;">
-                        <img src="{{ product.image.url }}" width="100%">
+                    <a href="{% url 'detail' product.product_id %}" style="text-decoration: none; color: black;">
+                        <img src="{{ product.image }}" width="100%">
                         <br>
                         <p style="text-align: center;">{{ product.title }}<br>${{ product.price }}</p>
                     </a>

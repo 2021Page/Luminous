@@ -3,28 +3,17 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Q
-from .forms import UserForm
-from .models import Product, Cart, Like
+from .forms import *
+from django.contrib.auth.models import User as django_user
+from .models import *
 from django.core.exceptions import ObjectDoesNotExist
-import pymysql
 
 # Create your views here.
 
 def main(request):
-    news = Product.objects.filter(special__icontains="new")[:3]
-    bests = Product.objects.filter(special__icontains="best")[:3]
-    
-    con = pymysql.connect(host='localhost', user='user', password='1234', db='luminous', charset='utf8')
-    curs = con.cursor()
-    sql = "SELECT * FROM testTable"
-    curs.execute(sql)
-    data = curs.fetchall()
+    news = Product.objects.filter(detail_category__icontains="new")[:3]
+    bests = Product.objects.filter(detail_category__icontains="best")[:3]
 
-    con.close()
-
-    if data:
-        print(data[0])
-    
     context = {
         'news' : news,
         'bests' : bests
@@ -33,15 +22,29 @@ def main(request):
 
 def join(request):
     if request.method == "POST":
+        joinform = JoinForm(request.POST)
         form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username = username, password = raw_password)
+        if joinform.is_valid() and form.is_valid():
+            username = joinform.cleaned_data.get('username')
+            raw_password = joinform.cleaned_data.get('password1')
+            new_user = User.objects.create(
+            user_id = username,
+            password = raw_password,
+            user_name = form.cleaned_data.get('name'),
+            email = form.cleaned_data.get('email'),
+            point = 0,
+            phone = form.cleaned_data.get('phone'),
+            city = form.cleaned_data.get('city'),
+            gu = form.cleaned_data.get('gu'),
+            zipcode = form.cleaned_data.get('zipcode')
+            )
+            new_user.save()
+            joinform.save()
+            authenticate(username = username, password = raw_password)
             return redirect('login')
     else:
-        form = UserForm()
+        form = JoinForm()
+        userform = UserForm()
     return render(request, 'page/join.html', {'form': form})
 
 def login(request):
@@ -51,11 +54,12 @@ def logout(request):
     return render(request, 'page/main.html')
 
 def cart(request):
-    userID = request.user.id
-    if not userID:
+    if not request.user:
         results = ""
         return render(request, 'page/cart.html')
-    results = Cart.objects.filter(userID__icontains=userID)
+    else:
+        print(request.user)
+    results = Cart.objects.filter(user_id=request.user.username)
     subtotal = 0
     total = 0
     for result in results:
@@ -69,17 +73,17 @@ def cart(request):
     return render(request, 'page/cart.html', context)
 
 def cart_add(request, product_id):
-    userID = request.user.id
-    if not userID:
+    if not request.user:
         return redirect('detail', product_id)
-    product = Product.objects.get(id=product_id)
+    product = Product.objects.get(product_id=product_id)
     try:
-        cart_item = Cart.objects.get(userID=request.user.id, product=product)
+        cart_item = Cart.objects.get(user_id=request.user.username, product=product)
         cart_item.quantity += 1
         cart_item.save()
     except Cart.DoesNotExist:
+        cartuser = User.objects.get(user_id=request.user.username)
         cart_item = Cart.objects.create(
-            userID=request.user.id,
+            user=cartuser,
             product = product,
             quantity = 1
         )
@@ -88,24 +92,23 @@ def cart_add(request, product_id):
 
 
 def cart_remove(request, product_id):
-    userID = request.user.id
-    if not userID:
+    if not request.user:
         return redirect('detail', product_id)
-    product = get_object_or_404(Product, id=product_id)
-    cartdelete = Cart.objects.get(userID=request.user.id, product=product)
+    product = get_object_or_404(Product, product_id=product_id)
+    cartdelete = Cart.objects.get(user_id=request.user.username, product=product)
     cartdelete.delete()
 
     return redirect('cart')
 
 def cart_buy(request):
-    userID = request.user.id
-    results = Cart.objects.filter(userID__icontains=userID)
+    results = Cart.objects.filter(user_id=request.user.id)
     for result in results:
         result.delete()
 
     return redirect('cart')
 
 def mypage(request):
+    userID = request.user.id
     return render(request, 'page/mypage.html')
 
 def like(request):
@@ -113,7 +116,7 @@ def like(request):
     if not userID:
         results = ""
         return render(request, 'page/like.html')
-    results = Like.objects.filter(userID__icontains=userID)
+    results = Likes.objects.filter(user_id=request.user.username)
     context = {
         'products' : results
     }
@@ -124,14 +127,15 @@ def like_add(request, product_id):
     userID = request.user.id
     if not userID:
         return redirect('detail', product_id)
-    product = Product.objects.get(id=product_id)
+    product = Product.objects.get(product_id=product_id)
     try:
-        like_item = Like.objects.get(userID=request.user.id, product=product)
+        like_item = Likes.objects.get(user_id=request.user.username, product=product)
         like_item.save()
-    except Like.DoesNotExist:
-        like_item = Like.objects.create(
-            userID=request.user.id,
-            product = product
+    except Likes.DoesNotExist:
+        likeuser = User.objects.get(user_id=request.user.username)
+        like_item = Likes.objects.create(
+            user=likeuser,
+            product= product
         )
         like_item.save()
 
@@ -142,24 +146,24 @@ def like_remove(request, product_id):
     userID = request.user.id
     if not userID:
         return redirect('detail', product_id)
-    product = get_object_or_404(Product, id=product_id)
-    likedelete = Like.objects.get(userID=request.user.id, product=product)
+    product = get_object_or_404(Product, product_id=product_id)
+    likedelete = Likes.objects.get(user_id=request.user.username, product=product)
     likedelete.delete()
 
     return redirect('detail', product_id)
 
 def howto(request):
-    return render(request, 'page/howto.html')
+    return render(request, 'page/howto.html', context)
 
 def new(request):
-    results = Product.objects.filter(special__icontains="new")
+    results = Product.objects.filter(detail_category__icontains="new")
     context = {
         'products' : results
     }
     return render(request, 'page/shop/shopnew.html', context)
 
 def best(request):
-    results = Product.objects.filter(special__icontains="best")
+    results = Product.objects.filter(detail_category__icontains="best")
     context = {
         'products' : results
     }
@@ -187,13 +191,14 @@ def care(request):
     return render(request, 'page/shop/shopcare.html', context)
 
 def detail(request, product_id):
-    product = Product.objects.get(id=product_id)
+    product = Product.objects.get(product_id=product_id)
     liked = 0
-    try:
-        like_item = Like.objects.get(userID=request.user.id, product=product)
-        liked = 1
-    except Like.DoesNotExist:
-        liked = 0
+    if request.user.is_authenticated:
+        try:
+            like_item = Likes.objects.get(user_id=request.user.username, product_id=product_id)
+            liked = 1
+        except Likes.DoesNotExist:
+            liked = 0
 
     context = {
         'product' : product,
@@ -203,13 +208,13 @@ def detail(request, product_id):
 
 
 def event(request):
-    return render(request, 'page/event.html')
+    return render(request, 'page/event.html', context)
 
 def faq(request):
-    return render(request, 'page/faq.html')
+    return render(request, 'page/faq.html', context)
 
 def location(request):
-    return render(request, 'page/location.html')
+    return render(request, 'page/location.html', context)
 
 def result(request):
     search = request.GET.get('searchstr')

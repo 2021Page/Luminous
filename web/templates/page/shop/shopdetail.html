@@ -23,34 +23,38 @@
         <h1 style="padding:17px; background-color:#EBF5FF" id="head">Shop_Nail</h1><br><br>
         {% elif product.category == "pedi" %}
         <h1 style="padding:17px; background-color:#EBF5FF" id="head">Shop_Pedi</h1><br><br>
+        {% elif product.category == "care" %}
+        <h1 style="padding:17px; background-color:#EBF5FF" id="head">Shop_Care</h1><br><br>
         {% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img class="detailimg" id="border" src="{{ product.image.url }}"
+                    <img class="detailimg" id="border" src="{{ product.image }}"
                         style="overflow: hidden; border: 5px solid lightgray; text-align:center; margin:50px;width:350px; height:350px; height:auto;">
                 </div>
                 <div class="col-lg-6">
                     <br>
                     {% if product.category == "nail" %}
-                    <p style="font-size:25px;"><b>LUMINOUS NAIL</b><br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br></p>
+                    <p style="font-size:25px;"><b>LUMINOUS NAIL</b>
                     {% elif product.category == "pedi" %}
-                    <p style="font-size:25px;"><b>LUMINOUS PEDI</b><br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br></p>
+                    <p style="font-size:25px;"><b>LUMINOUS PEDI</b>
                     {% elif product.category == "care" %}
-                    <p style="font-size:25px;"><b>LUMINOUS CARE</b><br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br></p>
+                    <p style="font-size:25px;"><b>LUMINOUS CARE</b>
                     {% endif %}
+                    <br>{{ product.title }}<br><br>PRICE : ${{product.price }}<br><br>
+                    </p>
                     <hr>
                     {% if liked == 1 %}
                     <a style="text-decoration: none; color: black; width:100%;"
-                        href="{% url 'likeremove' product.id %}">
+                        href="{% url 'likeremove' product.product_id %}">
                         <button class="detail" id="Like" onclick="unlikealert()">UnLike</button>
                     </a><br>
                     {% else %}
-                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'likeadd' product.id %}">
+                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'likeadd' product.product_id %}">
                         <button class="detail" id="Like" onclick="likealert()">Like</button>
                     </a><br>
                     {% endif %}
-                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'cartadd' product.id %}">
+                    <a style="text-decoration: none; color: black; width:100%;" href="{% url 'cartadd' product.product_id %}">
                         <button class="detail" id="Cart" onclick="cartalert()">Cart</button>
                     </a><br>
                     <input type="button" class="detail" id="Buynow" value="Buynow" onclick="buynowalert()"><br>
