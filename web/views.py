@@ -122,12 +122,17 @@ def mypage(request):
     sql = "SELECT * FROM luminous.user WHERE user_ID='"+userID+"'"
     curs.execute(sql)
     data = curs.fetchall()
-    print(data)
-    print(data[0][4])
+    #print(data)
+    #print(data[0][4])
+    sql2 = "SELECT * FROM luminous.coupon WHERE user_ID='"+userID+"'"
+    curs.execute(sql2)
+    data2 = curs.fetchall()
     con.close()
     context = {
-        'point' : data[0][4]
+        'point' : data[0][4],
+        'coupon': data2[0][1]
     }
+    
     return render(request, 'page/mypage.html', context)
 
 def like(request):
