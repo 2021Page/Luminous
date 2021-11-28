@@ -69,5 +69,20 @@ def detail(request, product_id):
     return render(request, 'page/shop/shopdetail.html', context)
 
 def detail_buy(request, product_id):
+    userID = request.user.username
+    dbinfo = open_db_info()
+    con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
+    curs = con.cursor()
+    title = "SELECT title FROM product WHERE product_ID="+str(product_id)
+    price = "SELECT price FROM product WHERE product_ID="+str(product_id)
+    curs.execute(title)
+    data_title = curs.fetchall()
     
+    curs.execute(price)
+    data_price = curs.fetchall()
+    sql= "INSERT into order_info(total_Price, order_Status, user_ID, order_product) values(%s,%s,%s,%s)"
+    curs.execute(sql,(data_price[0][0], 'completed', userID, data_title[0][0]))
+    con.commit()
+    data = curs.fetchall()
+    con.close()
     return redirect('detail', product_id)
