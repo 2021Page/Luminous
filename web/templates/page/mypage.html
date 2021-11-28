@@ -3,87 +3,87 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% load static %}
-    {% block extrahead %}
-    <title>MyPage</title>
-    <link rel="stylesheet" href="{% static 'page/css/mypage.css' %}">
-    {% endblock %}
+  {% load static %}
+  {% block extrahead %}
+  <title>MyPage</title>
+  <link rel="stylesheet" href="{% static 'page/css/mypage.css' %}">
+  {% endblock %}
 </head>
 
 <body>
-    {% block content %}
+  {% block content %}
 
-    <h1 style="padding:17px; background-color:#EBF5FF; text-align: center;" id="head">My Page</h1>
+  <h1 style="padding:17px; background-color:#EBF5FF; text-align: center;" id="head">My Page</h1>
 
-    <!--Member box-->
-    <div style="border-style:dashed; margin:60px 70px 0px 70px;">
-        <div class="container-fluid">
-            <div class="row" style="margin:50px 120px 50px 120px;">
-                <div class="col-md-4">
-                    <span><img src="{% static 'page/img/mypagelogo.png' %}" alt="" width="100%"></span>
-                </div>
-                <div class="col-md-5">
-                    <p id="welcome">Welcome to Luminous!</p>
-                    <button class="btn btn-outline-info btn-lg" id="movelike"><a href="{% url 'like' %}">Move to LIKE</a></button>
-                </div>
-                <div class="col-md-3">
-                    <h4 id="point">My Point | 200 <br> My Coupon | 2 </h4>
-                </div>
-            </div>
+  <!--Member box-->
+  <div style="border-style:dashed; margin:60px 70px 0px 70px;">
+    <div class="container-fluid">
+      <div class="row" style="margin:50px 120px 50px 120px;">
+        <div class="col-md-4">
+          <span><img src="{% static 'page/img/mypagelogo.png' %}" alt="" width="100%"></span>
         </div>
+        <div class="col-md-5">
+          <p id="welcome">Welcome to Luminous!</p>
+          <button class="btn btn-outline-info btn-lg" id="movelike"><a href="{% url 'like' %}">Move to LIKE</a></button>
+        </div>
+        <div class="col-md-3">
+          <h4 id="point">My Point | {{ point }} <br> My Coupon | {{ coupon }} </h4>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!--Order List-->
-    <p style="text-align:center; margin-top:45px; font-size:25pt;">Order List</p>
-    <div style="border-style:dashed; margin:15px 70px 50px 70px;">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Date of order</th>
-            <th scope="col">Product Information</th>
-            <th scope="col">Product Amount</th>
-            <th scope="col">Order Processing Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-light">
-            <th scope="row">2021.05.15</th>
-            <td>Frost White</td>
-            <td>$8</td>
-            <td>Delivery completed</td>
-          </tr>
-          <tr class="table-danger">
-            <th scope="row">2021.04.19</th>
-            <td>My Daisy</td>
-            <td>$10</td>
-            <td>Delivery completed</td>
-          </tr>
-          <tr class="table-light">
-            <th scope="row">2021.02.26</th>
-            <td>Mint Latte</td>
-            <td>$8</td>
-            <td>Delivery completed</td>
-          </tr>
-          <tr class="table-warning">
-            <th scope="row">2021.02.01</th>
-            <td>Rose Pop</td>
-            <td>$12</td>
-            <td>Delivery completed</td>
-          </tr>
-          <tr class="table-light">
-            <th scope="row">2020.12.03</th>
-            <td>Sweet Orchild</td>
-            <td>$11</td>
-            <td>Delivery completed</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-        {% endblock content %}
+  <!--Order List-->
+  <p style="text-align:center; margin-top:45px; font-size:25pt;">Order List</p>
+  <div style="border-style:dashed; margin:15px 70px 50px 70px;">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Date of order</th>
+          <th scope="col">Product Information</th>
+          <th scope="col">Product Amount</th>
+          <th scope="col">Order Processing Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-light">
+          <th scope="row">2021.05.15</th>
+          <td>Frost White</td>
+          <td>$8</td>
+          <td>Delivery completed</td>
+        </tr>
+        <tr class="table-danger">
+          <th scope="row">2021.04.19</th>
+          <td>My Daisy</td>
+          <td>$10</td>
+          <td>Delivery completed</td>
+        </tr>
+        <tr class="table-light">
+          <th scope="row">2021.02.26</th>
+          <td>Mint Latte</td>
+          <td>$8</td>
+          <td>Delivery completed</td>
+        </tr>
+        <tr class="table-warning">
+          <th scope="row">2021.02.01</th>
+          <td>Rose Pop</td>
+          <td>$12</td>
+          <td>Delivery completed</td>
+        </tr>
+        <tr class="table-light">
+          <th scope="row">2020.12.03</th>
+          <td>Sweet Orchild</td>
+          <td>$11</td>
+          <td>Delivery completed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endblock content %}
 </body>
 
 </html>

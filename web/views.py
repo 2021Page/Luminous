@@ -115,15 +115,20 @@ def cart_buy(request):
     return redirect('cart')
 
 def mypage(request):
-    userID = request.user.id
+    userID = request.user.username
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-    sql = "SELECT * FROM mypage"
+    sql = "SELECT * FROM luminous.user WHERE user_ID='"+userID+"'"
     curs.execute(sql)
     data = curs.fetchall()
+    print(data)
+    print(data[0][4])
     con.close()
-    return render(request, 'page/mypage.html')
+    context = {
+        'point' : data[0][4]
+    }
+    return render(request, 'page/mypage.html', context)
 
 def like(request):
     userID = request.user.id
