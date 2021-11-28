@@ -66,10 +66,16 @@ def mypage(request):
     sql3 = "SELECT order_Date, order_product, total_Price, order_Status FROM luminous.order_info WHERE user_ID='"+userID+"'"
     curs.execute(sql3)
     data3 = curs.fetchall()
+    print(data3)
+    print(data2)
     con.close()
     context = {
         'point' : data[0][4],
-        'coupon': data2[0][1]
+        'coupon': data2[0][1],
+        'order_date': data3[0][0],
+        'order_product': data3[0][1],
+        'total_price': data3[0][2],
+        'order_status': data3[0][3]
     }
     
     return render(request, 'page/mypage.html', context)

@@ -50,8 +50,14 @@
         </tr>
       </thead>
 
-      {% for item in products %}
+      <!-- {% for item in products %} -->
       <tbody>
+        <tr class="table">
+          <th scope="row">1</th>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
         <tr class="table-light">
           <th scope="row">{{ order_date }}</th>
           <td>{{ order_product }}</td>
@@ -59,7 +65,7 @@
           <td>{{ order_status }}</td>
         </tr>
       </tbody>
-        {% endfor %}
+      <!-- {% endfor %} -->
 
     </table>
   </div>
