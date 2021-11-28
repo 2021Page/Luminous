@@ -225,7 +225,7 @@ def event(request):
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-    sql = "SELECT * FROM testTable"
+    sql = "SELECT * FROM event"
     curs.execute(sql)
     data = curs.fetchall()
     con.close()
