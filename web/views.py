@@ -222,7 +222,8 @@ def detail(request, product_id):
 
 
 def event(request):
-    con = pymysql.connect(host='localhost', user=db_id, password=db_pw, db='luminous', charset='utf8')
+    dbinfo = open_db_info()
+    con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
     sql = "SELECT * FROM testTable"
     curs.execute(sql)
