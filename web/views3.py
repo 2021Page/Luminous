@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
@@ -14,7 +15,6 @@ import json
 def open_db_info():
     f = open('db.json')
     data = json.load(f)
-    print(data)
     return data
 
 def main(request):
@@ -76,3 +76,32 @@ def result(request):
         'products' : results
     }
     return render(request, 'page/result.html', context)
+
+def send_contact(request):
+    userid = request.user.username
+    res_num = 0
+    if not userid:
+        res_num = 2
+    else:
+        dbinfo = open_db_info()
+        con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
+        curs = con.cursor()
+
+
+        sql = "SELECT user_ID, email FROM User WHERE user_ID='"+userid+"'"
+        curs.execute(sql)
+        data = curs.fetchall()
+
+        comment = request.POST.get('comment', None)
+        print("comment: ", comment)
+        user_name = ''.join(data[0][0])
+        user_email = ''.join(data[0][1])
+
+        sql = "INSERT INTO Questionnaire(email, comment, user_ID) VALUES('"+user_email+"', '"+comment+"', '"+user_name+"')"
+        curs.execute(sql)
+        con.commit()
+        con.close()
+        res_num = 1
+    
+    context = {'res': res_num}
+    return HttpResponse(json.dumps(context), content_type="application/json")

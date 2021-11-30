@@ -23,9 +23,9 @@
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-
-    </script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        
     <script src="{% static 'page/js/base.js' %}"></script>
 
     <!-- CSS -->
@@ -112,37 +112,64 @@
         <div style=" margin-top:80px; text-align:center; font-size:15px">
             <div id="info" class="container-fluid">
                 <h2 class="text-center" style="padding: 10px 0;">CONTACT</h2>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <p>LUMINOUS</p>
-                        <p> 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul</p>
-                        <p>02-426-5839</p>
-                        <p>luminous@lumimail.com</p>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="row">
-                            <div class="col-sm-4 form-group">
-                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <input class="form-control" style="width:70%" id="email" name="email" placeholder="Email"
-                                    type="email" required>
-                            </div>
-                            <div class="col-sm-2 form-group">
-                            </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <p>LUMINOUS</p>
+                            <p> 524, Bongeunsa-ro, Samsung 1-dong, Gangnam-gu, Seoul</p>
+                            <p>02-426-5839</p>
+                            <p>luminous@lumimail.com</p>
                         </div>
-                        <textarea class="form-control" style="width:68%" id="comments" name="comments" placeholder="Comment"
-                            rows="5"></textarea><br>
-                        <div class="row">
-                            <div class="col-sm-8 form-group">
-                                <button type="button" id="send" onclick="func()">Send</button>
+                        <div class="col-sm-7">
+                            <textarea class="form-control" style="width:68%" id="comments" name="comments" placeholder="Comment"
+                                rows="5"></textarea><br>
+                            <div class="row">
+                                <div class="col-sm-8 form-group">
+                                    <button type="button" id="send">Send</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </footer>
+    <script type="text/javascript">
+        $("#send").click(function () {
+            var comments = document.getElementById("comments").value;
+            if (comments == "") {
+                alert("Please fill in blank.");
+                return false;
+            }
+            if (confirm("Comments : " + comments + "\n\nAre you sure to send this comment?") == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'send' %}",
+                    data: { 'comment': comments, csrfmiddlewaretoken: "{{ csrf_token }}" },
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.res == 1){
+                            alert("submit complete!");
+                            location.reload();
+                        }
+                        else if(response.res == 2) {
+                            alert("You need to log in first.");
+                            window.location.replace("/login/");
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert("Unknown error occured. Please retry.");
+                    },
+                });
+                
+                
+            }
+            else {
+                return;
+            }
+        });
+    </script>
     <div id="bottom"></div>
 </body>
 </html>

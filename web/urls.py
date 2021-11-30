@@ -28,6 +28,7 @@ urlpatterns = [
     path('faq/', views3.faq, name='faq'),
     path('location/', views3.location, name='location'),
     path('result', views3.result, name='result'),
+    path('question/', views3.send_contact, name='send'),
 
     #views4
     path('cart/', views4.cart, name='cart'),
