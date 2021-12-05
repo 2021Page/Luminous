@@ -70,18 +70,14 @@ def cart_buy(request):
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
 
-    results = Cart.objects.filter(user_id=request.user.id)
-    for result in results:
-        result.delete()
-
     #장바구니에서 Product_ID 가져오기    
-    cart_p_ID= "SELECT product_ID FROM luminous.cart WHERE user_ID='"+userID+"'"
+    cart_p_ID= "SELECT product_ID, quantity FROM luminous.cart WHERE user_ID='"+userID+"'"
     curs.execute(cart_p_ID)
     product_ID = curs.fetchall()
 
     #상품이름이랑 가격
     title_list = []
-    price = ""
+    total_price = 0
     for product in product_ID:
         title = "SELECT title FROM luminous.product WHERE product_ID='"+str(product[0])+"'"
         price = "SELECT price FROM luminous.product WHERE product_ID='"+str(product[0])+"'"
@@ -90,14 +86,14 @@ def cart_buy(request):
         curs.execute(price)
         data_price = curs.fetchall()
         title_list.append(data_title[0][0])
-        price = str(data_price[0][0] + 3)
+        total_price += data_price[0][0]*product[1] + 3
 
     #현재시간
     time="SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d')"
     curs.execute(time)
     data_time = curs.fetchall()
     sql= "INSERT into order_info(order_Date, total_Price, order_Status, user_ID) values(%s,%s,%s,%s)"
-    curs.execute(sql,(data_time[0][0], price, 'completed', userID))
+    curs.execute(sql,(data_time[0][0], str(total_price), 'completed', userID))
 
     sql = "SELECT order_ID from order_info ORDER BY order_ID DESC LIMIT 1"
     curs.execute(sql)

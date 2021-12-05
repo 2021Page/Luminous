@@ -63,18 +63,41 @@ def mypage(request):
     data2 = curs.fetchall()
 
     #주문내역
-    sql3 = "SELECT order_id, order_Date, total_Price, order_Status FROM luminous.order_info WHERE user_ID='"+userID+"'"
+    order_p_list = []
+    sql3 = "SELECT order_ID, order_Date, total_Price, order_Status FROM luminous.order_info WHERE user_ID='"+userID+"'"
     curs.execute(sql3)
     data3 = curs.fetchall()
-    sql4="SELECT order_p_name FROM buy WHERE order_id="
-    curs.execute(sql4)
-    data4 = curs.fetchall()
+    for per_order in data3:
+        per_order_p_str = ""
+        sql4="SELECT order_p_name FROM buy WHERE order_ID="+str(per_order[0])
+        curs.execute(sql4)
+        data4 = curs.fetchall()
+        print(data4)
+        i = 0
+        for order_product in data4:
+            if i == 0:
+                per_order_p_str += order_product[0]
+                i+=1
+            else:
+                per_order_p_str = per_order_p_str + ", " + order_product[0]
+        order_p_list.append(per_order_p_str)
+    print(order_p_list)
     
     con.close()
+
+    cur_orderlist = list(data3) #주문내역 튜닝
+    orderlist = []
+    i = 0
+    for order in cur_orderlist:
+        order = list(order)
+        order.insert(2, order_p_list[i])
+        i+=1
+        orderlist.append(order)
+
     context = {
         'point' : data[0][4], #포인트
         'coupon': data2[0][0], #쿠폰
-        'order_list': data3 #주문내역
+        'order_list': orderlist, #주문내역
     }
     
     return render(request, 'page/mypage.html', context)

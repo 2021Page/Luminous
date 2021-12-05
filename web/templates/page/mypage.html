@@ -45,7 +45,7 @@
         <tr>
           <th scope="col">Date of order</th>
           <th scope="col">Product Information</th>
-          <th scope="col">Product Amount</th>
+          <th scope="col">Price</th>
           <th scope="col">Order Processing Status</th>
         </tr>
       </thead>
@@ -53,9 +53,9 @@
         {% for i in order_list %}
         <tr class="table-light">
           <th scope="row">{{ i.1 }}</th>
-          <td>'</td>
           <td>{{ i.2 }}</td>
           <td>{{ i.3 }}</td>
+          <td>{{ i.4 }}</td>
         </tr>
         {% endfor%}
       </tbody>
