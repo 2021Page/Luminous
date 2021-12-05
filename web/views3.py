@@ -40,6 +40,18 @@ def event(request):
     con.close()
     return render(request, 'page/event.html')
 
+def event_pcp(request, event_name):
+    dbinfo = open_db_info()
+    con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
+    curs = con.cursor()
+
+    #여기서 작업
+    #event_name 변수는 이벤트 이름~
+
+    con.commit()
+    con.close()
+    return redirect('event')
+
 def event_coupon(request):
     #쿠폰 개수 올려주는 함수
     dbinfo = open_db_info()
