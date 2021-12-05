@@ -58,21 +58,23 @@ def mypage(request):
     sql = "SELECT * FROM luminous.user WHERE user_ID='"+userID+"'"
     curs.execute(sql)
     data = curs.fetchall()
-    #print(data)
-    #print(data[0][4])
     sql2 = "SELECT count(*) FROM luminous.coupon WHERE user_ID='"+userID+"'"
     curs.execute(sql2)
     data2 = curs.fetchall()
-    sql3 = "SELECT order_Date, order_product, total_Price, order_Status FROM luminous.order_info WHERE user_ID='"+userID+"'"
+
+    #주문내역
+    sql3 = "SELECT order_id, order_Date, total_Price, order_Status FROM luminous.order_info WHERE user_ID='"+userID+"'"
     curs.execute(sql3)
     data3 = curs.fetchall()
-    print(data3)
-    print(data2)
+    sql4="SELECT order_p_name FROM buy WHERE order_id="
+    curs.execute(sql4)
+    data4 = curs.fetchall()
+    
     con.close()
     context = {
-        'point' : data[0][4],
-        'coupon': data2[0][0],
-        'order_list': data3
+        'point' : data[0][4], #포인트
+        'coupon': data2[0][0], #쿠폰
+        'order_list': data3 #주문내역
     }
     
     return render(request, 'page/mypage.html', context)

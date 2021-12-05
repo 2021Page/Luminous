@@ -86,8 +86,9 @@ def detail_buy(request, product_id):
     data_time = curs.fetchall()
 
     #order_info  테이블에 삽입
+    total_price=int(data_price[0][0])+3
     sql= "INSERT into order_info(order_Date, total_Price, order_Status, user_ID) values(%s,%s,%s,%s)"
-    curs.execute(sql,(data_time[0][0], data_price[0][0], 'completed', userID))
+    curs.execute(sql,(data_time[0][0], str(total_price), 'completed', userID))
 
     #order_id 불러오기
     sql = "SELECT order_ID from order_info ORDER BY order_ID DESC LIMIT 1"
