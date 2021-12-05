@@ -45,22 +45,41 @@ def event_coupon(request):
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-    sql = "SELECT * FROM event"
+
+    coupon_num = request.POST.get('coupon_num', None)
+    
+    sql = "SELECT * FROM coupon where user_ID='"+request.user.username+"';"
     curs.execute(sql)
     data = curs.fetchall()
+
+    for datum in data:
+        print("datum: ", datum[1], " coupon_num: ", coupon_num, " is_same: ", datum[1] == coupon_num)
+        if int(datum[1]) == int(coupon_num):
+            res_num = 2
+            print("탈출")
+            return HttpResponse(json.dumps({'res': res_num}), content_type="application/json")
+
+    sql = "INSERT INTO coupon VALUES('"+request.user.username+"' ,'"+str(coupon_num)+"')"
+    curs.execute(sql)
+    con.commit()
     con.close()
-    return render(request, 'page/event.html')
+    res_num = 1
+    return HttpResponse(json.dumps({'res': res_num}), content_type="application/json")
 
 def event_point(request):
-    #쿠폰 개수 올려주는 함수
+    #포인트 올려주는 함수
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-    sql = "SELECT * FROM event"
+    sql = "SELECT point FROM user where user_ID='"+request.user.username+"';"
     curs.execute(sql)
     data = curs.fetchall()
+    new_point = int(data[0][0]) + 3
+    sql = "UPDATE user SET point="+str(new_point)+" where user_ID='"+request.user.username+"';"
+    curs.execute(sql)
+    con.commit()
     con.close()
-    return render(request, 'page/event.html')
+    return redirect('event')
 
 def faq(request):
     return render(request, 'page/faq.html')

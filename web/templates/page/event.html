@@ -32,7 +32,7 @@
                     Available only at Luminous online shopping mall. [Offline store unavailable]<br>
                     *Valid period: within 7 days after membership registration<br>
                     * Available for purchases of $15 or more <br><br><br>
-                    <input type="button" value=" GET POINT 3 " style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
+                    <a href="{% url 'event_point' %}"><input type="button" class="coupon" value=" GET POINT 3 " style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;"></a>
                 </p>
             </div>
         </div>
@@ -53,8 +53,7 @@
                 <br> Hashtag: #Luminose #Ruminose #LuminoseEvent<br>
                 <br> *If you do not meet the event benefit criteria, your benefits may be cancelled.
                 <br> *Event Period: 2021.5.18 to 2021.7.1 <br>* Winner announcement date: 7.10 (Sat) (Individual contact)<br><br><br>
-                <input type="button" value=" GET COUPON " style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
-            </p>
+                <input type="button" class="coupon" name="1" value=" GET COUPON " style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">            </p>
             </div>
         </div>
     
@@ -76,7 +75,7 @@
                 through a lottery.<br>
                 *Validity: Within 30 days of download <br>*This event may be terminated or changed without notice,
                 depending on the limited number of coupons and our circumstances.<br><br><br>
-                <input type="button" value=" GET COUPON " style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
+                <input type="button" class="coupon" name="2" value=" GET COUPON " style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
             </p>
             </div>
         </div>
@@ -88,6 +87,30 @@
     </div>
     
     <script src="{% static 'page/js/chart.js' %}"></script>
+    <script type="text/javascript">
+        $(".coupon").click(function () {
+            var cnum = $(this).attr("name");
+            $.ajax({
+                    type: "POST",
+                    url: "{% url 'event_coupon' %}",
+                    data: { 'coupon_num': cnum, csrfmiddlewaretoken: "{{ csrf_token }}" },
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.res == 1){
+                            alert("Coupon earned.");
+                            location.reload();
+                        }
+                        else if(response.res == 2) {
+                            alert("You already have same coupon");
+                            location.reload();
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert("Unknown error occured. Please retry.");
+                    },
+                });
+        });
+    </script>
 
     {% endblock content %}
 </body>
