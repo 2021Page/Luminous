@@ -65,9 +65,44 @@ def cart_remove(request, product_id):
     return redirect('cart')
 
 def cart_buy(request):
+    userID = request.user.username
+    dbinfo = open_db_info()
+    con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
+    curs = con.cursor()
+
     results = Cart.objects.filter(user_id=request.user.id)
     for result in results:
         result.delete()
+
+    #장바구니에서 Product_ID 가져오기    
+    cart_p_ID= "SELECT product_ID FROM luminous.cart WHERE user_ID='"+userID+"'"
+    curs.execute(cart_p_ID)
+    product_ID = curs.fetchall()
+    
+    print(product_ID)
+
+    #상품이름이랑 가격
+    title = "SELECT title FROM luminous.product WHERE product_ID='"+str(product_ID[0][0])+"'"
+    price = "SELECT price FROM luminous.product WHERE product_ID='"+str(product_ID[0][0])+"'"
+    curs.execute(title)
+    data_title = curs.fetchall()
+    curs.execute(price)
+    data_price = curs.fetchall()
+    print("aaaaa")
+    print(data_title)
+    print(data_price)
+    print("aaaaa")
+
+    #현재시간
+    time="SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d')"
+    curs.execute(time)
+    data_time = curs.fetchall()
+    print(data_time)
+    sql= "INSERT into order_info(order_Date, total_Price, order_Status, user_ID, order_product) values(%s,%s,%s,%s,%s)"
+    curs.execute(sql,(data_time[0][0], data_price[0][0], 'completed', userID, data_title[0][0]))
+    con.commit()
+    data = curs.fetchall()
+    con.close()
 
     return redirect('cart')
 
