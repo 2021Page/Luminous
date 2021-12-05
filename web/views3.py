@@ -44,7 +44,8 @@ def event_pcp(request, event_name):
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-
+    sql= "INSERT into event(event_Name,user_ID) values(%s,%s)"
+    curs.execute(sql,(event_name, request.user.username))
     #여기서 작업
     #event_name 변수는 이벤트 이름~
 
