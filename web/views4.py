@@ -78,30 +78,42 @@ def cart_buy(request):
     cart_p_ID= "SELECT product_ID FROM luminous.cart WHERE user_ID='"+userID+"'"
     curs.execute(cart_p_ID)
     product_ID = curs.fetchall()
-    
-    print(product_ID)
 
     #상품이름이랑 가격
-    title = "SELECT title FROM luminous.product WHERE product_ID='"+str(product_ID[0][0])+"'"
-    price = "SELECT price FROM luminous.product WHERE product_ID='"+str(product_ID[0][0])+"'"
-    curs.execute(title)
-    data_title = curs.fetchall()
-    curs.execute(price)
-    data_price = curs.fetchall()
-    print("aaaaa")
-    print(data_title)
-    print(data_price)
-    print("aaaaa")
+    title_list = []
+    price = ""
+    for product in product_ID:
+        title = "SELECT title FROM luminous.product WHERE product_ID='"+str(product[0])+"'"
+        price = "SELECT price FROM luminous.product WHERE product_ID='"+str(product[0])+"'"
+        curs.execute(title)
+        data_title = curs.fetchall()
+        curs.execute(price)
+        data_price = curs.fetchall()
+        title_list.append(data_title[0][0])
+        price = str(data_price[0][0] + 3)
 
     #현재시간
     time="SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d')"
     curs.execute(time)
     data_time = curs.fetchall()
-    print(data_time)
-    sql= "INSERT into order_info(order_Date, total_Price, order_Status, user_ID, order_product) values(%s,%s,%s,%s,%s)"
-    curs.execute(sql,(data_time[0][0], data_price[0][0], 'completed', userID, data_title[0][0]))
+    sql= "INSERT into order_info(order_Date, total_Price, order_Status, user_ID) values(%s,%s,%s,%s)"
+    curs.execute(sql,(data_time[0][0], price, 'completed', userID))
+
+    sql = "SELECT order_ID from order_info ORDER BY order_ID DESC LIMIT 1"
+    curs.execute(sql)
+    data_order = curs.fetchall()
+    print(data_order)
+
+    i = 0
+    for product in product_ID:
+        sql= "INSERT INTO buy VALUES(%s,%s,%s)"
+        curs.execute(sql, (data_order[0][0], product[0], title_list[i]))
+        i += 1
+
+    sql = "DELETE FROM cart WHERE user_ID='"+request.user.username+"'"
+    curs.execute(sql)
+
     con.commit()
-    data = curs.fetchall()
     con.close()
 
     return redirect('cart')
