@@ -50,36 +50,14 @@
         </tr>
       </thead>
       <tbody>
+        {% for i in order_list %}
         <tr class="table-light">
-          <th scope="row">{{ order_list }}</th>
-          <td>{{ order_product }}</td>
-          <td>{{ total_price }}</td>
-          <td>{{ order_status }}</td>
+          <th scope="row">{{ i.0 }}</th>
+          <td>{{ i.1 }}</td>
+          <td>{{ i.2 }}</td>
+          <td>{{ i.3 }}</td>
         </tr>
-        <tr class="table-danger">
-          <th scope="row">2021.04.19</th>
-          <td>My Daisy</td>
-          <td>$10</td>
-          <td>Delivery completed</td>
-        </tr>
-        <tr class="table-light">
-          <th scope="row">2021.02.26</th>
-          <td>Mint Latte</td>
-          <td>$8</td>
-          <td>Delivery completed</td>
-        </tr>
-        <tr class="table-warning">
-          <th scope="row">2021.02.01</th>
-          <td>Rose Pop</td>
-          <td>$12</td>
-          <td>Delivery completed</td>
-        </tr>
-        <tr class="table-light">
-          <th scope="row">2020.12.03</th>
-          <td>Sweet Orchild</td>
-          <td>$11</td>
-          <td>Delivery completed</td>
-        </tr>
+        {% endfor%}
       </tbody>
     </table>
   </div>
