@@ -72,10 +72,7 @@ def mypage(request):
     context = {
         'point' : data[0][4],
         'coupon': data2[0][1],
-        'order_date': data3[0][0],
-        'order_product': data3[0][1],
-        'total_price': data3[0][2],
-        'order_status': data3[0][3]
+        'order_list': order_list
     }
     
     return render(request, 'page/mypage.html', context)
