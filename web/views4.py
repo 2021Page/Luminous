@@ -14,7 +14,6 @@ import json
 def open_db_info():
     f = open('db.json')
     data = json.load(f)
-    print(data)
     return data
 
 def cart(request):

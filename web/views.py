@@ -14,7 +14,6 @@ import json
 def open_db_info():
     f = open('db.json')
     data = json.load(f)
-    print(data)
     return data
 
 def join(request):
@@ -55,7 +54,7 @@ def mypage(request):
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-    sql = "SELECT * FROM luminous.user WHERE user_ID='"+userID+"'"
+    sql = "SELECT * FROM luminous.user_mypage WHERE user_ID='"+userID+"'"
     curs.execute(sql)
     data = curs.fetchall()
     sql2 = "SELECT count(*) FROM luminous.coupon WHERE user_ID='"+userID+"'"
@@ -72,7 +71,6 @@ def mypage(request):
         sql4="SELECT order_p_name FROM buy WHERE order_ID="+str(per_order[0])
         curs.execute(sql4)
         data4 = curs.fetchall()
-        print(data4)
         i = 0
         for order_product in data4:
             if i == 0:
@@ -81,7 +79,6 @@ def mypage(request):
             else:
                 per_order_p_str = per_order_p_str + ", " + order_product[0]
         order_p_list.append(per_order_p_str)
-    print(order_p_list)
     
     con.close()
 
@@ -95,7 +92,8 @@ def mypage(request):
         orderlist.append(order)
 
     context = {
-        'point' : data[0][4], #포인트
+        'user_name':data[0][1], #유저이름
+        'point' : data[0][2], #포인트
         'coupon': data2[0][0], #쿠폰
         'order_list': orderlist, #주문내역
     }

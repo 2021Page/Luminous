@@ -27,7 +27,7 @@
           <span><img src="{% static 'page/img/mypagelogo.png' %}" alt="" width="100%"></span>
         </div>
         <div class="col-md-5">
-          <p id="welcome">Welcome to Luminous!</p>
+          <p id="welcome">Welcome to Luminous, <br><b style="font-size: 18px;">{{ user_name }}</b>.</p>
           <button class="btn btn-outline-info btn-lg" id="movelike"><a href="{% url 'like' %}">Move to LIKE</a></button>
         </div>
         <div class="col-md-3">
