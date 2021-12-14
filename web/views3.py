@@ -38,20 +38,39 @@ def event(request):
     curs.execute(sql)
     data = curs.fetchall()
     con.close()
-    return render(request, 'page/event.html')
+    context = {
+        'event':data
+    }
+    return render(request, 'page/event.html', context)
 
-def event_pcp(request, event_name):
+def event_pcp(request):
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
-    sql= "INSERT into event(event_Name,user_ID) values(%s,%s)"
-    curs.execute(sql,(event_name, request.user.username))
-    #여기서 작업
-    #event_name 변수는 이벤트 이름~
 
+    event_id = request.POST.get('event_id', None)
+
+    #중복 참여 방지
+    sql = "SELECT event_ID FROM participate where user_ID='"+request.user.username+"';"
+    curs.execute(sql)
+    data = curs.fetchall()
+    for datum in data:
+        if datum[0] == int(event_id):
+            res_num = 2
+            return HttpResponse(json.dumps({'res': res_num}), content_type="application/json")
+
+    #현재시간
+    time="SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d')"
+    curs.execute(time)
+    data_time = curs.fetchall()
+
+    #참여
+    sql = "INSERT INTO participate VALUES('"+request.user.username+"', '"+event_id+"' ,'"+data_time[0][0]+"')"
+    curs.execute(sql)
     con.commit()
     con.close()
-    return redirect('event')
+    res_num = 1
+    return HttpResponse(json.dumps({'res': res_num}), content_type="application/json")
 
 def event_coupon(request):
     #쿠폰 개수 올려주는 함수

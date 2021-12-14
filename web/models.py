@@ -64,10 +64,8 @@ class Coupon(models.Model):
 
 
 class Event(models.Model):
-    event_name = models.CharField(db_column='event_Name', primary_key=True, max_length=45)  # Field name made lowercase.
-    user = models.ForeignKey('User', models.DO_NOTHING, db_column='user_ID')  # Field name made lowercase.
-    participant_num = models.IntegerField(db_column='participant_Num', blank=True, null=True)  # Field name made lowercase.
-    event_content = models.CharField(db_column='event_Content', max_length=500, blank=True, null=True)  # Field name made lowercase.        
+    event_id = models.IntegerField(db_column='event_ID', primary_key=True)  # Field name made lowercase.
+    event_name = models.CharField(db_column='event_Name', max_length=45)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -98,7 +96,7 @@ null=True)  # Field name made lowercase.
 
 class Participate(models.Model):
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='user_ID', blank=True, null=True)  # Field name made lowercase.
-    event_name = models.ForeignKey(Event, models.DO_NOTHING, db_column='event_Name', blank=True, null=True)  # Field name made lowercase.   
+    event = models.ForeignKey(Event, models.DO_NOTHING, db_column='event_ID', blank=True, null=True)  # Field name made lowercase.        
     participation_date = models.DateField(db_column='participation_Date', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

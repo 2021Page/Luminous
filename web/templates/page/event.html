@@ -27,16 +27,15 @@
             </div>
             <div class="col-md-8 event">
                 <br>
-                <p style="font-size : x-large">Luminous New Member Event<br><br></p>
+                <p style="font-size : x-large">{{ event.0.1 }}<br><br></p>
                 <p style="left:50px;"> When you sign up for Luminous, you will receive 3 points.<br>
                     Available only at Luminous online shopping mall. [Offline store unavailable]<br>
                     *Valid period: within 7 days after membership registration<br>
                     * Available for purchases of $15 or more <br><br><br>
-                    <a href="{% url 'event_point' %}"><input type="button" class="coupon" value=" GET POINT 3 "
-                            style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;"></a>
-                    <a href="{% url 'event_pcp' 'New Member Event' %}"><input type="button" class="participate" name="3"
-                            value=" PARTICIPATE "
-                            style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;"></a>
+                    <a href="{% url 'event_point' %}"><button class="point" onclick="alert('3 point earned.')"
+                            style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">&nbsp;GET POINT 3&nbsp;</button></a>
+                    <input type="button" class="participate" name="{{ event.0.0 }}" value=" PARTICIPATE "
+                        style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
 
                 </p>
             </div>
@@ -52,19 +51,18 @@
             </div>
             <div class="col-md-8 event">
                 <br>
-                <p style="font-size : x-large">Luminous SNS Authentication Event <br><br></p>
-                <p style="left:50px;"> When you certify your Luminous nails on Instagram, you will receive a Luminos
+                <p style="font-size : x-large">{{ event.1.1 }}<br><br></p>
+                <p style="left:50px;"> When you certify your Luminous nails on Instagram, you will receive a Luminous
                     nail and
                     pedi set through a lottery. <br> You must enter the #tag below correctly.
-                    <br> Hashtag: #Luminose #Ruminose #LuminoseEvent<br>
+                    <br> Hashtag: #Luminous #LuminoseEvent<br>
                     <br> *If you do not meet the event benefit criteria, your benefits may be cancelled.
                     <br> *Event Period: 2021.5.18 to 2021.7.1 <br>* Winner announcement date: 7.10 (Sat) (Individual
                     contact)<br><br><br>
-                    <input type="button" class="coupon" name="2" value=" GET COUPON "
+                    <input type="button" class="coupon" name="{{ event.1.0 }}" value=" GET COUPON "
                         style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
-                    <a href="{% url 'event_pcp' 'SNS EVENT' %}"><input type="button" class="participate" name="1"
-                            value=" PARTICIPATE "
-                            style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;"></a>
+                    <input type="button" class="participate" name="{{ event.1.0 }}" value=" PARTICIPATE "
+                        style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
                 </p>
             </div>
         </div>
@@ -79,7 +77,7 @@
             </div>
             <div class="col-md-8 event">
                 <br>
-                <p style="font-size : x-large">Luminous Kakao Channel Addition Event<br><br></p>
+                <p style="font-size : x-large">{{ event.2.1 }}<br><br></p>
                 <p style="left:50px;">If you add a Luminous Kakao channel, we offer a coupon worth 3000 won. <br>
                     You can easily receive various news of Luminous from your smartphone.<br>
                     *Additional coupons for Kakao Channel can only be used for Ruminary online shopping malls. [Can't
@@ -88,11 +86,10 @@
                     through a lottery.<br>
                     *Validity: Within 30 days of download <br>*This event may be terminated or changed without notice,
                     depending on the limited number of coupons and our circumstances.<br><br><br>
-                    <input type="button" class="coupon" name="3" value=" GET COUPON "
+                    <input type="button" class="coupon" name="{{ event.2.0 }}" value=" GET COUPON "
                         style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
-                    <a href="{% url 'event_pcp' 'Channel Addition Event' %}"><input type="button" class="participate"
-                            name="2" value=" PARTICIPATE "
-                            style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;"></a>
+                    <input type="button" class="participate" name="{{ event.2.0 }}" value=" PARTICIPATE "
+                    style="margin-bottom:10px; background-color:#EBF5FF;  border-radius:30px;">
                 </p>
             </div>
         </div>
@@ -120,6 +117,29 @@
                     }
                     else if (response.res == 2) {
                         alert("You already have same coupon");
+                        location.reload();
+                    }
+                },
+                error: function (request, status, error) {
+                    alert("Unknown error occured. Please retry.");
+                },
+            });
+        });
+
+        $(".participate").click(function () {
+            var pnum = $(this).attr("name");
+            $.ajax({
+                type: "POST",
+                url: "{% url 'event_pcp' %}",
+                data: { 'event_id': pnum, csrfmiddlewaretoken: "{{ csrf_token }}" },
+                dataType: "json",
+                success: function (response) {
+                    if (response.res == 1) {
+                        alert("Successfully participated.");
+                        location.reload();
+                    }
+                    else if (response.res == 2) {
+                        alert("You already participated this event.");
                         location.reload();
                     }
                 },
