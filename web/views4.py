@@ -92,9 +92,10 @@ def cart_buy(request):
     time="SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d')"
     curs.execute(time)
     data_time = curs.fetchall()
+    # order_info 테이블에 주문한 정보 데이터 삽입
     sql= "INSERT into order_info(order_Date, total_Price, order_Status, user_ID) values(%s,%s,%s,%s)"
     curs.execute(sql,(data_time[0][0], str(total_price), 'completed', userID))
-
+    # order_ID 가져오기
     sql = "SELECT order_ID from order_info ORDER BY order_ID DESC LIMIT 1"
     curs.execute(sql)
     data_order = curs.fetchall()
@@ -102,10 +103,12 @@ def cart_buy(request):
 
     i = 0
     for product in product_ID:
+        # buy테이블에 주문한 상품들 넣기
         sql= "INSERT INTO buy VALUES(%s,%s,%s)"
         curs.execute(sql, (data_order[0][0], product[0], title_list[i]))
         i += 1
 
+    # 장바구니에서 상품 delete 
     sql = "DELETE FROM cart WHERE user_ID='"+request.user.username+"'"
     curs.execute(sql)
 

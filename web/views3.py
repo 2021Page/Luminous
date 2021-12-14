@@ -80,6 +80,7 @@ def event_coupon(request):
 
     coupon_num = request.POST.get('coupon_num', None)
     
+    # 중복 참여자 검사
     sql = "SELECT * FROM coupon where user_ID='"+request.user.username+"';"
     curs.execute(sql)
     data = curs.fetchall()
@@ -91,6 +92,7 @@ def event_coupon(request):
             print("탈출")
             return HttpResponse(json.dumps({'res': res_num}), content_type="application/json")
 
+    # 쿠폰 개수 삽입
     sql = "INSERT INTO coupon VALUES('"+request.user.username+"' ,'"+str(coupon_num)+"')"
     curs.execute(sql)
     con.commit()
@@ -99,14 +101,15 @@ def event_coupon(request):
     return HttpResponse(json.dumps({'res': res_num}), content_type="application/json")
 
 def event_point(request):
-    #포인트 올려주는 함수
     dbinfo = open_db_info()
     con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
     curs = con.cursor()
+    # 현재 사용자의 포인트 값 가져오기
     sql = "SELECT point FROM user where user_ID='"+request.user.username+"';"
     curs.execute(sql)
     data = curs.fetchall()
     new_point = int(data[0][0]) + 3
+    # 포인트 올려주기
     sql = "UPDATE user SET point="+str(new_point)+" where user_ID='"+request.user.username+"';"
     curs.execute(sql)
     con.commit()
@@ -138,7 +141,7 @@ def send_contact(request):
         con = pymysql.connect(host='localhost', user=dbinfo['db_id'], password=dbinfo['db_pw'], db='luminous', charset='utf8')
         curs = con.cursor()
 
-
+        # 사용자 정보 불러오기
         sql = "SELECT user_ID, email FROM User WHERE user_ID='"+userid+"'"
         curs.execute(sql)
         data = curs.fetchall()
